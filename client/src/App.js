@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import GoalInput from './components/GoalInput'
-import Goals from './containers/Goals'
+import GoalInput from './components/goals/GoalInput'
+import Goals from './containers/goals/Goals'
+import BudgetInput from './components/budget/BudgetInput'
+import Budget from './containers/budget/Budget'
 
 class App extends Component {
   render() {
@@ -12,10 +14,15 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Welcome to a Better Budget</h1>
         </header>
-        <p className="App-intro">
+        <p className="Goals">
           Start by creating your goals.
           <GoalInput />
           <Goals />
+        </p>
+        <p className="Budget">
+          Start by creating your goals.
+          <BudgetInput />
+          <Budget />
         </p>
       </div>
     );
