@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import logo from './piggy-bank.png';
 import './App.css';
 import GoalInput from './components/goals/GoalInput'
-import Goals from './containers/goals/Goals'
+import Goals from './components/goals/Goals'
 import PotentialGoals from './containers/goals/PotentialGoals'
 import BudgetInput from './components/budget/BudgetInput'
 import Budget from './containers/budget/Budget'

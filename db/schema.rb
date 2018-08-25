@@ -25,7 +25,9 @@ ActiveRecord::Schema.define(version: 2018_08_25_011145) do
 
   create_table "goals", force: :cascade do |t|
     t.text "title"
-    t.float "amount"
+    t.float "total"
+    t.float "amount_paid", default: 0.0
+    t.float "amount_left"
     t.boolean "paid", default: false
     t.text "category"
   end
