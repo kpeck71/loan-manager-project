@@ -9,7 +9,7 @@ class BudgetInput extends Component {
   render() {
     return (
       <div className="BudgetInput">
-        <p>Goals to go here</p>
+        <p>Budget to go here</p>
         <form onSubmit={(event) => this.handleSubmit(event)}>
           <input type="text" placeholder="Monthly Income"/>
           <input type="text" placeholder="Housing Costs"/>
