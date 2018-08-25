@@ -6,5 +6,5 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-goals = Goal.create([{ title: Bike , amount: 900, category: credit, }, { title: Savings , amount: 150, category: savings  }])
-budget = Budget.create([{ income: 6500, , housing_cost: 900 , food: 300 , credit_cards: 300 , personal_loan: 350 , car_loan: 129.50 , savings: 50 , miscellaneous: 275.76 }])
+goals = Goal.create([{ title: "Bike" , amount: 900, category: "credit", }, { title: "Savings" , amount: 150, category: "savings"  }])
+budget = Budget.create([{ income: 6500, housing_cost: 900 , food: 300 , credit_cards: 300 , personal_loan: 350 , car_loan: 129.50 , savings: 50 , miscellaneous: 275.76 }])
