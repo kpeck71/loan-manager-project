@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import Goals from './Goals';
+import { addPayment } from '../actions/goals';
+import { connect } from 'react-redux';
 
 class Goal extends Component {
 
@@ -33,7 +35,7 @@ class Goal extends Component {
           <p>Amount left to reach goal: {goal.amount_left}</p>
           <p>Category: {goal.category}</p>
           <form onSubmit={(event) => this.handleSubmit(event)}>
-            <input type="text" placeholder="Payment" value={this.state.payment}/>
+            <input type="text" placeholder="Payment" value={this.state.text}/>
             <input type="submit" />
           </form>
         </div>
@@ -54,4 +56,4 @@ class Goal extends Component {
 
 
 
-export default Goal;
+export default connect(null, { addPayment })(Goal);
