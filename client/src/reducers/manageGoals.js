@@ -20,7 +20,8 @@ let goal;
 
     case 'ADD_PAYMENT':
       goal = {
-        total: action.total - action.payment
+        goalId: action.payment.goalId,
+        total: action.total - action.payment.payment
       }
       return { ...state, goals: [...state.goals, goal] }
 

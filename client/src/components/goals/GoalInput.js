@@ -18,7 +18,7 @@ class GoalInput extends Component {
   render() {
     return (
       <div className="GoalInput">
-        <p>Goals to go here</p>
+        <p>Add a New Goal:</p>
         <form onSubmit={(event) => this.handleSubmit(event)}>
           <input type="text" placeholder="Title" value={this.state.title}/>
           <input type="text" placeholder="Total Cost" value={this.state.total}/>

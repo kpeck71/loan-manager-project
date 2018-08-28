@@ -1,6 +1,6 @@
-export const addPayment = (goal) => {
+export const addPayment = (payment) => {
   return {
     type: 'ADD_PAYMENT',
-    goal
+    payment
   };
 };
