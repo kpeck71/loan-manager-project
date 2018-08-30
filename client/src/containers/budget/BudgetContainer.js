@@ -44,10 +44,13 @@ class BudgetContainer extends Component {
       miscellaneous: ''
     })
   }
-
+  
   render() {
-    const renderBudget = this.props.budget.map((budget) => { return budget.income } )
-    
+    const renderBudget = this.props.budget.map((budget) => {
+      const SPENDING = budget.housing_cost + budget.food + budget.credit_cards + budget.car_loan + budget.personal_loan + budget.savings + budget.miscellaneous
+       return (budget.income - SPENDING )
+     })
+
     return (
       <div>
         <h4>Here is how much money you have: { renderBudget }</h4>

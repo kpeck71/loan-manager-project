@@ -4,8 +4,22 @@ export default function manageGoals(state = { loading: false, goals: [], budget:
 
 let goal;
   switch (action.type) {
-    case 'CREATE_GOAL':
+    case 'LOADING_GOALS' :
     return { ...state, loading: true }
+
+
+    case 'ADD_GOAL':
+    console.log('adding goal', action.goal)
+
+      goal = {
+        id: cuid(),
+        title: action.goal.title,
+        total: action.goal.total,
+        category: action.goal.category,
+        amount_paid: 0,
+        amount_left: action.goal.total
+      }
+      return { ...state, goals: [...state.goals, goal] }
 
     case 'FETCH_GOALS':
       return { ...state, goals: [...state.goals, ...action.payload] }
@@ -23,19 +37,6 @@ let goal;
         miscellaneous: action.newBudget.miscellaneous
       }
       return { ...state, budget: [...state.budget, budget] }
-
-    case 'ADD_GOAL':
-    console.log('adding goal', action.goal)
-
-      goal = {
-        id: cuid(),
-        title: action.goal.title,
-        total: action.goal.total,
-        category: action.goal.category,
-        amount_paid: 0,
-        amount_left: action.goal.total
-      }
-      return { ...state, goals: [...state.goals, goal] }
 
     case 'ADD_PAYMENT':
     console.log('adding paymemt')
