@@ -5,8 +5,7 @@ class BudgetInput extends Component {
   render() {
     return (
       <div className="BudgetInput">
-        <p>Budget to go here</p>
-        <form onSubmit={this.props.handlePayment}>
+        <form onSubmit={this.props.handleSubmit}>
           <input type="text" name="income" value={this.props.income } placeholder="Monthly Income" onChange={this.props.handleChange} />
           <input type="text" name="housing_cost" value={this.props.housing_cost } placeholder="Housing Costs" onChange={this.props.handleChange} />
           <input type="text" name="food" value={this.props.food } placeholder="Food" onChange={this.props.handleChange} />

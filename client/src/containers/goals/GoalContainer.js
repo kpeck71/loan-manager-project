@@ -13,8 +13,6 @@ class GoalContainer extends Component {
       category: '',
       payment: 0
     };
-
-    // this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange = event => {
@@ -31,6 +29,7 @@ class GoalContainer extends Component {
   handleGoalSubmit = event => {
     console.log('submitted ')
     event.preventDefault();
+    debugger
     this.props.addGoal({title: this.state.title, total: this.state.total, category: this.state.category});
     this.setState({
       title: '', total: 0, category: ''
@@ -59,7 +58,7 @@ class GoalContainer extends Component {
 const mapStateToProps = state => { return { goals: state.goals } }
 
 const mapDispatchToProps = dispatch => ({
-  // fetchGoals: goals => dispatch({ type: 'FETCH_GOALS', fetchGoals })
+  fetchGoals: goals => dispatch({ type: 'FETCH_GOALS', fetchGoals }),
   addGoal: goal => dispatch({ type: 'ADD_GOAL', goal }),
   addPayment: payment => dispatch({ type: 'ADD_PAYMENT', payment })
 })
