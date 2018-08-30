@@ -46,10 +46,10 @@ class BudgetContainer extends Component {
   }
 
   render() {
+    const renderBudget = this.props.budget.map((budget) => { return budget.income } )
     return (
       <div>
-        Here is how much money you have:
-        { this.props.budget }
+        <h4>Here is how much money you have: { renderBudget }</h4>
         <BudgetInput handleChange={this.handleChange} handleSubmit={this.handleSubmit} addBudget={this.props.addBudget} />
       </div>
     );
