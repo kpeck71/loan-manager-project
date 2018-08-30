@@ -29,7 +29,9 @@ let goal;
         id: cuid(),
         title: action.goal.title,
         total: action.goal.total,
-        category: action.goal.category
+        category: action.goal.category,
+        amount_paid: 0,
+        amount_left: action.goal.total
       }
       return { ...state, goals: [...state.goals, goal] }
       console.log(state)
