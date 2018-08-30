@@ -1,20 +1,13 @@
-export const addPayment = (payment) => {
-  return {
-    type: 'ADD_PAYMENT',
-    payment
-  };
-};
-
-export const fetchGoals = (fetchGoals) => {
-  return {
-    type: 'FETCH_GOALS',
-    fetchGoals
-  }
-}
+// export const addPayment = (payment) => {
+//   return {
+//     type: 'ADD_PAYMENT',
+//     payment
+//   };
+// };
 
 export function createGoal(newGoal) {
     return(dispatch) => {
-      dispatch({type: 'CREATE_GOAL'});
+      dispatch({type: 'LOADING_GOALS'});
       return fetch('/api/v1/goals.json'), {
           method: 'POST',
           headers: {
@@ -26,11 +19,11 @@ export function createGoal(newGoal) {
     }
   }
 
-// export function fetchGoals() {
-//   return(dispatch) => {
-//     dispatch({type: 'LOADING_GOALS'});
-//     return fetch('/api/v1/goals.json')
-//       .then((response) => {return response.json()})
-//       .then(goals => dispatch({ type: 'FETCH_GOALS', payload: goals }));
-//     };
-//   }
+export function fetchGoals() {
+  return(dispatch) => {
+    dispatch({type: 'LOADING_GOALS'});
+    return fetch('/api/v1/goals.json')
+      .then((response) => {return response.json()})
+      .then(goals => dispatch({ type: 'FETCH_GOALS', payload: goals }));
+    };
+  }
