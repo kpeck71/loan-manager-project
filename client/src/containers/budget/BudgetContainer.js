@@ -47,6 +47,7 @@ class BudgetContainer extends Component {
 
   render() {
     const renderBudget = this.props.budget.map((budget) => { return budget.income } )
+    
     return (
       <div>
         <h4>Here is how much money you have: { renderBudget }</h4>

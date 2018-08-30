@@ -1,9 +1,12 @@
 import cuid from 'cuid';
 
-export default function manageGoals(state = { goals: [], budget: [] }, action) {
+export default function manageGoals(state = { loading: false, goals: [], budget: [] }, action) {
 
 let goal;
   switch (action.type) {
+    case 'CREATE_GOAL':
+    return { ...state, loading: true }
+
     case 'FETCH_GOALS':
       return { ...state, goals: [...state.goals, ...action.payload] }
 
