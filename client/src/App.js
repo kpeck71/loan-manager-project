@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import logo from './piggy-bank.png';
 import './App.css';
+
 import GoalContainer from './containers/goals/GoalContainer'
 import PotentialGoals from './containers/goals/PotentialGoals'
 import Goals from './components/goals/Goals'
