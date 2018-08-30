@@ -38,7 +38,7 @@ class GoalContainer extends Component {
   }
 
   handlePayment = event => {
-    console.log('submitted ')
+    console.log('payment submitted ')
     event.preventDefault();
     this.props.addPayment({payment: this.state.payment, goalId: this.props.goal.id, goalTotal: this.props.goal.total})
     this.setState({

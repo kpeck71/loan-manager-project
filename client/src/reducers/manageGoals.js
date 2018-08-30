@@ -34,7 +34,6 @@ let goal;
         amount_left: action.goal.total
       }
       return { ...state, goals: [...state.goals, goal] }
-      console.log(state)
 
     case 'ADD_PAYMENT':
     console.log('adding paymemt')

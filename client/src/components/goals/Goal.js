@@ -11,8 +11,8 @@ class Goal extends Component {
           <p>Amount paid: {goal.amount_paid}</p>
           <p>Amount left to reach goal: {goal.amount_left}</p>
           <p>Category: {goal.category}</p>
-          <form onSubmit={(event) => this.handleSubmit(event)} >
-            <input type="text" placeholder="Payment" value={this.props.payment} onChange={(event) => this.handleChange(event)} />
+          <form onSubmit={this.props.handlePayment} >
+            <input type="text" placeholder="Payment" value={this.props.payment} onChange={this.props.handleChange} />
             <input type="submit" />
           </form>
         </div>
