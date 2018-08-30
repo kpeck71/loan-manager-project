@@ -1,31 +1,6 @@
 import React, { Component } from 'react';
-import Goals from './Goals';
-import { addPayment } from '../actions/goals';
-import { connect } from 'react-redux';
 
 class Goal extends Component {
-
-
-  state = {
-    payment: '',
-  }
-
-  handleChange = (event) => {
-    this.setState({
-      payment: event.target.value
-    });
-  }
-
-  handleSubmit = (event) => {
-    event.preventDefault();
-    console.log("paid!")
-    this.props.addPayment({payment: this.state.payment, goalId: this.props.goalId})
-    this.setState({
-      state: {
-        payment: ''
-      }
-    })
-  }
 
   render() {
     const { goal } = this.props;
@@ -37,7 +12,7 @@ class Goal extends Component {
           <p>Amount left to reach goal: {goal.amount_left}</p>
           <p>Category: {goal.category}</p>
           <form onSubmit={(event) => this.handleSubmit(event)} >
-            <input type="text" placeholder="Payment" value={this.state.payment} onChange={(event) => this.handleChange(event)} />
+            <input type="text" placeholder="Payment" value={this.props.payment} onChange={(event) => this.handleChange(event)} />
             <input type="submit" />
           </form>
         </div>
@@ -50,5 +25,4 @@ class Goal extends Component {
   //border-success - paid
 
 
-
-export default connect(null, { addPayment })(Goal);
+export default Goal;

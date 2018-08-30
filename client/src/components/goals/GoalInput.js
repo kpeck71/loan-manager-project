@@ -2,32 +2,20 @@ import React, { Component } from 'react';
 
 class GoalInput extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      title: '',
-      total: 0,
-      category: '',
-    };
-  }
-
-  handleSubmit(event) {
-    event.preventDefault();
-  }
-
   render() {
     return (
       <div className="GoalInput">
         <p>Add a New Goal:</p>
-        <form onSubmit={(event) => this.handleSubmit(event)}>
-          <input type="text" placeholder="Title" value={this.state.title}/>
-          <input type="text" placeholder="Total Cost" value={this.state.total}/>
-          <input type="dropdown" placeholder="Category" value={this.state.category}/>
+        <form onSubmit={this.props.handleGoalSubmit}>
+          <input type="text" placeholder="Title" name="title" value={this.props.title} onChange={this.props.handleChange}/>
+          <input type="number" placeholder="Total Cost" name="total" value={this.props.total} onChange={this.props.handleChange}/>
+          <input type="text" placeholder="Category" name="category" value={this.props.category} onChange={this.props.handleChange}/>
           <input type="submit" />
         </form>
       </div>
     );
   }
 }
+
 
 export default GoalInput;
