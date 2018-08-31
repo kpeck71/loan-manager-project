@@ -5,7 +5,7 @@ class Goals extends Component {
 
   render(){
     const renderGoals = this.props.goals.map((goal) => {
-        return <Goal goal={goal} addPayment={this.props.addPayment}/>
+        return <Goal goal={goal} handlePayment={this.props.handlePayment} handleChange={this.props.handleChange} addPayment={this.props.addPayment}/>
       })
 
     return(
