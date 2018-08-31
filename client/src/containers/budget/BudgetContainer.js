@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import BudgetInput from '../../components/budget/BudgetInput'
+import BudgetView from '../../components/budget/BudgetView'
 
 class BudgetContainer extends Component {
 
@@ -44,17 +45,26 @@ class BudgetContainer extends Component {
       miscellaneous: ''
     })
   }
-  
+
+  renderBudget = props => {
+    this.props.budget.map((budget) => {
+    const SPENDING = budget.housing_cost + budget.food + budget.credit_cards + budget.car_loan + budget.personal_loan + budget.savings + budget.miscellaneous
+     return (budget.income - SPENDING )
+    })
+  }
+
+  showBudget = props => {
+   if (this.props.budget > 0) {
+     return <BudgetView renderBudget={this.renderBudget} budget={this.props.budget} />;
+   }
+   return <BudgetInput handleChange={this.handleChange} handleSubmit={this.handleSubmit} addBudget={this.props.addBudget} />;
+ }
+
   render() {
-    const renderBudget = this.props.budget.map((budget) => {
-      const SPENDING = budget.housing_cost + budget.food + budget.credit_cards + budget.car_loan + budget.personal_loan + budget.savings + budget.miscellaneous
-       return (budget.income - SPENDING )
-     })
 
     return (
       <div>
-        <h4>Here is how much money you have: { renderBudget }</h4>
-        <BudgetInput handleChange={this.handleChange} handleSubmit={this.handleSubmit} addBudget={this.props.addBudget} />
+        {this.showBudget()}
       </div>
     );
   }
