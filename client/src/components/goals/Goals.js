@@ -5,7 +5,7 @@ const Goals = props => {
 
 function renderGoals(props) {
   return props.goals.map((goal) =>
- <Goal goal={goal} /> )
+ <Goal goal={goal} handlePayment={props.handlePayment}/> )
 };
     return(
       <div>

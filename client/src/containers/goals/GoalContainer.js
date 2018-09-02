@@ -11,6 +11,7 @@ class GoalContainer extends Component {
       title: '',
       total: 0,
       category: '',
+      payment: ''
     };
   }
 
@@ -43,23 +44,22 @@ class GoalContainer extends Component {
       title: '', total: 0, category: ''
     })
   }
-  //
-  //
-  // handlePayment = event => {
-  //   console.log('payment submitted ')
-  //   event.preventDefault();
-  //   this.props.addPayment({payment: this.state.payment, goalId: this.props.goal.id, goalTotal: this.props.goal.total})
-  //   this.setState({
-  //     payment: 0
-  //   })
-  // }
+
+  handlePayment = event => {
+    event.preventDefault();
+    console.log('payment submitted ')
+    this.props.addPayment({payment: this.state.payment, goalId: this.props.goal.id, goalTotal: this.props.goal.total})
+    this.setState({
+      payment: 0
+    })
+  }
 
 
   render() {
       return (
         <div>
           <GoalInput addGoal={this.props.addGoal} handleChange={this.handleChange} handleGoalSubmit={this.handleGoalSubmit}/>
-          <Goals goals={this.props.goals} addPayment={this.props.addPayment} handleChange={this.handleChange} />
+          <Goals goals={this.props.goals} addPayment={this.props.addPayment} handleChange={this.handleChange} handlePayment={this.handlePayment}/>
         </div>
       )
     }
