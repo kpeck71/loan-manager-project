@@ -6,12 +6,11 @@ import '../App.css';
 const NavBar = () => {
 
   return (
-    <div>
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <h1 className="App-title">Welcome to a Better Budget</h1>
-      </header>
-      <div style={{ borderBottom: '2px solid black', paddingBottom: '10px', marginBottom: '12px' }}>
+
+      <div style={{ borderBottom: '2px solid white', paddingBottom: '10px', marginBottom: '12px' }}>
         <NavLink
           style={{ marginRight: '10px' }}
           to="/"
@@ -20,12 +19,16 @@ const NavBar = () => {
         </NavLink>
         <NavLink
           style={{ marginRight: '10px' }}
-          to="/tips"
-        >
+          to="/tips">
           Tips
         </NavLink>
+        <NavLink
+          style={{ marginRight: '10px' }}
+          to="/ideas">
+          Ideas
+        </NavLink>
       </div>
-    </div>
+      </header>
   );
 }
 
