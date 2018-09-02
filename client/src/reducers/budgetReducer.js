@@ -1,6 +1,6 @@
 import cuid from 'cuid';
 
-export default function budgetReducer(state = { goals: [], budget: [] }, action) {
+export default function budgetReducer(state = { budget: [] }, action) {
 
 let budget;
   switch (action.type) {

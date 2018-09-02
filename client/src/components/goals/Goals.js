@@ -1,23 +1,23 @@
 import React, { Component } from 'react';
 import Goal from './Goal';
 
-class Goals extends Component {
+const Goals = props => {
 
-  render(){
-  
-
+function renderGoals(props) {
+  return props.goals.map((goal) =>
+ <Goal goal={goal} /> )
+};
     return(
       <div>
         <h3>Current Goals:</h3>
         <div className="container-fluid">
           <div className="row">
-            {/*renderGoals*/}
+            {renderGoals(props)}
           </div>
         </div>
       </div>
      )
-   }
-}
+  }
 
 
 

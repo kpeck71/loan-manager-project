@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import GoalInput from '../../components/goals/GoalInput';
 import Goals from '../../components/goals/Goals';
-import { fetchGoals } from '../../actions/goals'
+import { fetchGoals, addGoals, addPayment } from '../../actions/goals'
 
 class GoalContainer extends Component {
   constructor(props) {
@@ -11,7 +11,6 @@ class GoalContainer extends Component {
       title: '',
       total: 0,
       category: '',
-      payment: 0
     };
   }
 
@@ -39,9 +38,7 @@ class GoalContainer extends Component {
     // }
     console.log('submitted ')
     event.preventDefault();
-
     this.props.addGoal({title: this.state.title, total: this.state.total, category: this.state.category});
-
     this.setState({
       title: '', total: 0, category: ''
     })
@@ -62,13 +59,13 @@ class GoalContainer extends Component {
       return (
         <div>
           <GoalInput addGoal={this.props.addGoal} handleChange={this.handleChange} handleGoalSubmit={this.handleGoalSubmit}/>
-          <Goals addPayment={this.props.addPayment} handleChange={this.handleChange} handlePayment={this.handlePayment} goals={this.props.goals} />
+          <Goals goals={this.props.goals} addPayment={this.props.addPayment} handleChange={this.handleChange} />
         </div>
       )
     }
 }
 
-const mapStateToProps = state => { return { goals: state.goals } }
+const mapStateToProps = state =>  {console.log('state', state.GoalReducer.goals); return {goals: state.GoalReducer.goals} }
 
 const mapDispatchToProps = dispatch => ({
   fetchGoals: goals => dispatch({ type: 'FETCH_GOALS', fetchGoals }),
