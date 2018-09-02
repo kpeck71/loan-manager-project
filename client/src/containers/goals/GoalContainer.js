@@ -17,6 +17,7 @@ class GoalContainer extends Component {
 
   handleChange = event => {
     //arrow functions bind the this value to the function
+    event.persist()
     const target = event.target;
     const value = target.value;
     const name = target.name;
@@ -27,23 +28,35 @@ class GoalContainer extends Component {
   }
 
   handleGoalSubmit = event => {
+    // event.preventDefault()
+    // fetch('/api/v1/goals.json', {
+    //   method: "POST",
+    //   headers: {
+    //     'Content-Type: application/json'
+    //   },
+    //     body: JSON.stringify(this.state)
+    //   })
+    // }
     console.log('submitted ')
     event.preventDefault();
-    debugger
+
     this.props.addGoal({title: this.state.title, total: this.state.total, category: this.state.category});
+
     this.setState({
       title: '', total: 0, category: ''
     })
   }
+  //
+  //
+  // handlePayment = event => {
+  //   console.log('payment submitted ')
+  //   event.preventDefault();
+  //   this.props.addPayment({payment: this.state.payment, goalId: this.props.goal.id, goalTotal: this.props.goal.total})
+  //   this.setState({
+  //     payment: 0
+  //   })
+  // }
 
-  handlePayment = event => {
-    console.log('payment submitted ')
-    event.preventDefault();
-    this.props.addPayment({payment: this.state.payment, goalId: this.props.goal.id, goalTotal: this.props.goal.total})
-    this.setState({
-      payment: 0
-    })
-  }
 
   render() {
       return (
