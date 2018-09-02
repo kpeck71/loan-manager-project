@@ -21,7 +21,7 @@ class Api::V1::GoalsController < ApplicationController
   private
 
   def goal_params
-    params.require(:goal).permid(:id, :title, :amount, :paid, :category)
+    params.require(:goal).permid(:id, :title, :amount, :paid, :amount_left, :category)
   end
-  
+
 end
