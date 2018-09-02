@@ -13,6 +13,8 @@ class GoalContainer extends Component {
       category: '',
       payment: ''
     };
+    this.handleGoalSubmit = this.handleGoalSubmit.bind(this)
+    this.addNewGoal = this.addNewGoal.bind(this)
   }
 
   handleChange = event => {
@@ -27,23 +29,47 @@ class GoalContainer extends Component {
     })
   }
 
-  handleGoalSubmit = event => {
-    // event.preventDefault()
-    // fetch('/api/v1/goals.json', {
-    //   method: "POST",
-    //   headers: {
-    //     'Content-Type: application/json'
-    //   },
-    //     body: JSON.stringify(this.state)
-    //   })
-    // }
-    console.log('submitted ')
+  componentDidMount() {
+    fetchGoals();
+    console.log('fetched', this.props)
+    }
+
+  handleGoalSubmit(event) {
     event.preventDefault();
-    this.props.addGoal({title: this.state.title, total: this.state.total, category: this.state.category});
-    this.setState({
-      title: '', total: 0, category: ''
-    })
+
+    let newGoal = JSON.stringify(
+      { title: this.state.title, total: this.state.total, category: this.state.category } )
+      console.log(newGoal)
+
+    fetch('/api/v1/goals.json', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+        data: newGoal
+      })
+      .then((response) => response.json())
+      .then((goal)=>{
+        this.addNewGoal(goal)
+      })
+      //success message
+    }
+    // console.log('submitted ')
+    // event.preventDefault();
+    // this.props.addGoal({title: this.state.title, total: this.state.total, category: this.state.category});
+    // this.setState({
+    //   title: '', total: 0, category: ''
+    // })
+  // }
+  addNewGoal(goal){
+    this.props.addGoal({title: goal.title, total: goal.total, category: goal.category})
   }
+
+  componentDidMount(){
+      fetch('/api/v1/goals.json')
+        .then((response) => {return response.json()})
+        .then((data) => {this.setState({ goals: data }) });
+    }
 
   handlePayment = event => {
     event.preventDefault();
@@ -68,7 +94,7 @@ class GoalContainer extends Component {
 const mapStateToProps = state =>  {console.log('state', state.GoalReducer.goals); return {goals: state.GoalReducer.goals} }
 
 const mapDispatchToProps = dispatch => ({
-  fetchGoals: goals => dispatch({ type: 'FETCH_GOALS', fetchGoals }),
+  fetchGoals: () => dispatch(fetchGoals()),
   addGoal: goal => dispatch({ type: 'ADD_GOAL', goal }),
   addPayment: payment => dispatch({ type: 'ADD_PAYMENT', payment })
 })

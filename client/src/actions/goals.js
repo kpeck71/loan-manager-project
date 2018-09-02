@@ -34,10 +34,10 @@ export const addBudget = (budget) => {
 //   }
 //
 export function fetchGoals() {
-  // return(dispatch) => {
-  //   dispatch({type: 'LOADING_GOALS'});
-  //   return fetch('/api/v1/goals.json')
-  //     .then((response) => {return response.json()})
-  //     .then(goals => dispatch({ type: 'FETCH_GOALS', payload: goals }));
-  //   };
+  return(dispatch) => {
+    dispatch({type: 'LOADING_GOALS'});
+    return fetch('/api/v1/goals.json')
+      .then(response => response.json())
+      .then(goals => dispatch({ type: 'FETCH_GOALS', payload: goals }));
+    };
   }

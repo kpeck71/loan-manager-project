@@ -1,8 +1,8 @@
 import React from 'react';
 
-const PotentialGoals = props => {
+const GoalIdeas = props => {
     return (
-      <div className="PotentialGoals">
+      <div className="GoalIdeas">
         <ul>
           <li>Flights for under $/budgetamount/</li>
           <li>Donate it!</li>
@@ -12,4 +12,4 @@ const PotentialGoals = props => {
     );
   }
 
-export default PotentialGoals
+export default GoalIdeas

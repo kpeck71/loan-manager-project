@@ -4,6 +4,14 @@ export default function goalReducer(state = { goals: [] }, action) {
 
 let goal;
   switch (action.type) {
+
+    case 'LOADING':
+      return { ...state, loading: true }
+
+    case 'FETCH_GOALS':
+      return {...state, goals: [...state.goals, action.payload], loading: false }
+
+
     case 'ADD_GOAL':
     console.log('adding goal', action.goal)
       goal = {
@@ -28,7 +36,8 @@ let goal;
 
       return { ...state, goals: [...state.goals, goal] }
 
-      default:
-        return state
-    }
+    default:
+      return state
+  }
+
 };

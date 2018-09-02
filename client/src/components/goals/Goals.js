@@ -12,7 +12,7 @@ function renderGoals(props) {
         <h3>Current Goals:</h3>
         <div className="container-fluid">
           <div className="row">
-            {renderGoals(props)}
+            {/* {renderGoals(props)} */}
           </div>
         </div>
       </div>
