@@ -8,6 +8,7 @@ import GoalContainer from './containers/goals/GoalContainer'
 import Goals from './components/goals/Goals'
 import GoalIdeas from './containers/goals/GoalIdeas'
 import Tips from './containers/goals/Tips'
+import CompletedGoals from './containers/goals/CompletedGoals'
 
 import BudgetContainer from './containers/budget/BudgetContainer'
 
@@ -28,6 +29,7 @@ class App extends Component {
                   />
             <Route exact path="/tips" render={() => <Tips />} />
             <Route exact path='/ideas' render={routerProps => <GoalIdeas />} />
+            <Route exact path='/completed' render={routerProps => <CompletedGoals />} />
           </React.Fragment>
         </Router>
 

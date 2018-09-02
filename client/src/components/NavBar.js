@@ -27,6 +27,11 @@ const NavBar = () => {
           to="/ideas">
           Ideas
         </NavLink>
+        <NavLink
+          style={{ marginRight: '10px' }}
+          to="/completed">
+          Completed Goals
+        </NavLink>
       </div>
       </header>
   );
