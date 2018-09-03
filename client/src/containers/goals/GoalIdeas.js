@@ -25,7 +25,7 @@ class GoalIdeas extends Component {
      console.log(type)
      console.log(results)
      this.setState({
-       goals: results
+       goalIdeas: results
      })
    }
 
@@ -58,6 +58,7 @@ class GoalIdeas extends Component {
         <Dropdown options={options} onChange={this.onChangeType} value={defaultOption} placeholder="Select an option" />
         <button onClick={this.onCategoryClick}>Find goals</button>
         </div>
+        <IdeaBrowser goalIdeas={this.state.goalIdeas} />
       </div>
     );
   }
