@@ -3,8 +3,8 @@ import BudgetReducer from './budgetReducer'
 import GoalReducer from './goalReducer'
 
 const rootReducer = combineReducers({
-  BudgetReducer,
-  GoalReducer
+  budget: BudgetReducer,
+  goals: GoalReducer
 })
 
 export default rootReducer
