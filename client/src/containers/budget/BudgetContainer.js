@@ -69,7 +69,7 @@ class BudgetContainer extends Component {
   }
 }
 
-const mapStateToProps = state => {  return { income: state.income, expense_name: state.expense_name, expense_amount: state.expense_amount, expense_category: state.expense_category}}
+const mapStateToProps = state => { console.log('state.budget is', state.budget); return { budget: state.budget } }
 
 const mapDispatchToProps = dispatch => ({
   addBudget: newBudget => dispatch({ type: 'ADD_BUDGET', newBudget }),

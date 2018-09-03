@@ -91,7 +91,7 @@ class GoalContainer extends Component {
     }
 }
 
-const mapStateToProps = state =>  {console.log('state', state.GoalReducer.goals); return {goals: state.GoalReducer.goals} }
+const mapStateToProps = state =>  {console.log('state', state.goals); return {goals: state.goals} }
 
 const mapDispatchToProps = dispatch => ({
   fetchGoals: () => dispatch(fetchGoals()),
