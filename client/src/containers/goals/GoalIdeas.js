@@ -1,34 +1,57 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Dropdown from 'react-dropdown'
 import 'react-dropdown/style.css'
+import IdeaBrowser from '../../components/goals/IdeaBrowser'
 
+class GoalIdeas extends Component {
 
-const GoalIdeas = props => {
-  const options = [
-  { value: '25', label: 'Up to $25' },
-  { value: '50', label: '$25 - 50' },
-  { value: '100', label: '$50 - 100' },
-  { value: '150', label: '$100 - 150' },
-  { value: '500', label: '500+' },
-  ]
+  constructor(props) {
+    super(props)
+    this.state = {
+      goalIdeas: [],
+      filters: {
+        type: 'all'
+      }
+    }
+  }
 
-  const defaultOption = "Pick an amount"
+  onCategoryClick = (e) => {
+   const type = this.state.filters.type;
+   var url = `/api/v1/ideas.json`;
+   if (type !== 'all'){
+     url = `/api/ideas?type=${type}`;
+   }
+   fetch(url)
+     .then(response => response.json())
+     .then(data => this.setState({ goals: data }));
+   }
+
+   onChangeType = (e) => {
+     this.setState({
+       filters: {
+         type: e.value,
+         }
+       }, () => console.log(this.state.filters))
+   }
+
+  render() {
+    const options = [
+    { value: 'charity', label: 'Charity' },
+    { value: 'travel', label: 'Travel' },
+    { value: 'fun', label: 'Fun Stuff' },
+    ]
+
+    const defaultOption = "Choose a Category"
 
     return (
       <div className="GoalIdeas">
-        <p>Filter based on how much you want to put aside for a new goal</p>
+        <p>What kind of goal do you want to set for yourself?</p>
         <div style={{width: '50%'}} >
-        <Dropdown options={options} onChange={this._onSelect} value={defaultOption} placeholder="Select an option" />
+        <Dropdown options={options} onChange={this.onChangeType} value={defaultOption} placeholder="Select an option" />
         </div>
-
-
-        <ul>
-          <li>Flights for under $/budgetamount/</li>
-          <li>Donate it!</li>
-          <li>Savings!</li>
-        </ul>
       </div>
     );
   }
+}
 
 export default GoalIdeas

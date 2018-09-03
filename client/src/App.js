@@ -7,7 +7,7 @@ import NavBar from './components/NavBar'
 import GoalContainer from './containers/goals/GoalContainer'
 import Goals from './components/goals/Goals'
 import GoalIdeas from './containers/goals/GoalIdeas'
-import Tips from './containers/goals/Tips'
+import Tips from './components/goals/Tips'
 import CompletedGoals from './containers/goals/CompletedGoals'
 
 import BudgetContainer from './containers/budget/BudgetContainer'
