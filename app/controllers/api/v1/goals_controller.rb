@@ -3,6 +3,9 @@ class Api::V1::GoalsController < ApplicationController
     render json: Goal.all
   end
 
+  def ideas
+  end
+
   def create
     goal = Goal.create(goal_params)
     render json: goal

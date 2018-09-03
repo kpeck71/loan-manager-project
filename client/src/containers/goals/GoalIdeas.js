@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Dropdown from 'react-dropdown'
 import 'react-dropdown/style.css'
+import { getAll, getByCategory, getBetweenCost } from '../../data/ideas'
 import IdeaBrowser from '../../components/goals/IdeaBrowser'
 
 class GoalIdeas extends Component {
@@ -17,13 +18,20 @@ class GoalIdeas extends Component {
 
   onCategoryClick = (e) => {
    const type = this.state.filters.type;
-   var url = `/api/v1/ideas.json`;
+   // var url = `/data/ideas`;
    if (type !== 'all'){
-     url = `/api/ideas?type=${type}`;
+     // url = `/api/ideas?type=${type}`;
+     const results = getByCategory(type)
+     console.log(type)
+     console.log(results)
+     this.setState({
+       goals: results
+     })
    }
-   fetch(url)
-     .then(response => response.json())
-     .then(data => this.setState({ goals: data }));
+
+   // fetch(url)
+   //   .then(response => response.json())
+   //   .then(data => this.setState({ goals: data }));
    }
 
    onChangeType = (e) => {
@@ -48,6 +56,7 @@ class GoalIdeas extends Component {
         <p>What kind of goal do you want to set for yourself?</p>
         <div style={{width: '50%'}} >
         <Dropdown options={options} onChange={this.onChangeType} value={defaultOption} placeholder="Select an option" />
+        <button onClick={this.onCategoryClick}>Find goals</button>
         </div>
       </div>
     );
