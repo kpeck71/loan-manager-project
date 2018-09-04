@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import GoalInput from '../../components/goals/GoalInput';
 import Goals from '../../components/goals/Goals';
-import { fetchGoals, addGoals, addPayment } from '../../actions/goals'
+import { addGoal, addPayment, fetchGoals, deleteGoal } from '../../actions/goals'
 
 class GoalContainer extends Component {
   constructor(props) {
@@ -93,11 +93,11 @@ class GoalContainer extends Component {
 
 const mapStateToProps = state =>  {console.log('state', state.goals); return {goals: state.goals} }
 
-const mapDispatchToProps = dispatch => ({
-  // fetchGoals: () => dispatch(fetchGoals()),
-  addGoal: goal => dispatch({ type: 'ADD_GOAL', goal }),
-  addPayment: payment => dispatch({ type: 'ADD_PAYMENT', payment }),
-  deleteGoal: goal => dispatch({ type: 'DELETE_GOAL', goal})
-})
+// const mapDispatchToProps = dispatch => ({
+//  fetchGoals: () => dispatch(fetchGoals()),
+//   addGoal: goal => dispatch({ type: 'ADD_GOAL', goal }),
+//   addPayment: payment => dispatch({ type: 'ADD_PAYMENT', payment }),
+//   deleteGoal: goal => dispatch({ type: 'DELETE_GOAL', goal})
+// })
 
-export default connect(mapStateToProps, mapDispatchToProps)(GoalContainer);
+export default connect(mapStateToProps, { addGoal, addPayment, fetchGoals, deleteGoal })(GoalContainer);
