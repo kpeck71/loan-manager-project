@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import BudgetInput from '../../components/budget/BudgetInput'
 import BudgetView from '../../components/budget/BudgetView'
+import ExpenseInput from '../../components/budget/ExpenseInput'
 
 class BudgetContainer extends Component {
 
@@ -63,7 +64,8 @@ class BudgetContainer extends Component {
     return (
       <div>
         <BudgetInput handleChange={this.handleChange} handleSubmit={this.handleSubmit} handleExpenseSubmit={this.handleExpenseSubmit} />
-        <p>You have this much to work with: {this.props.income}</p>
+        <p>You have this much to work with: {this.props.budget.income}</p>
+        <ExpenseInput budgetId={this.props.budget.id} onChange={this.props.handleChange} handleExpenseSubmit={this.handleExpenseSubmit}/>  
       </div>
     );
   }

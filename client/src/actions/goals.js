@@ -19,6 +19,13 @@ export const addBudget = (budget) => {
   };
 };
 
+export const deleteGoal = goal => {
+  return {
+    type: 'DELETE_GOAL',
+    goal
+  }
+}
+
 // export function createGoal(newGoal) {
 //     return(dispatch) => {
 //       dispatch({type: 'LOADING_GOALS'});
