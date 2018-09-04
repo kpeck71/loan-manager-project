@@ -1,24 +1,24 @@
 import React, { Component } from 'react';
 import Goal from './Goal';
 
-const Goals = props => {
+class Goals extends Component {
 
-function renderGoals(props) {
-  return props.goals.map((goal) =>
- <Goal goal={goal} handlePayment={props.handlePayment}/> )
-};
-    return(
+
+render() {
+const renderGoals = this.props.goals.map((goal) => {
+  return <Goal goal={goal} handlePayment={this.props.handlePayment} />
+  });
+
+    return (
       <div>
         <h3>Current Goals:</h3>
         <div className="container-fluid">
           <div className="row">
-            {/* {renderGoals(props)} */}
+            {renderGoals}
           </div>
         </div>
       </div>
      )
   }
-
-
-
+}
 export default Goals;
