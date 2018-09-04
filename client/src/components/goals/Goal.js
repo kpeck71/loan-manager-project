@@ -11,6 +11,7 @@ class Goal extends Component {
           <p>Amount paid: {goal.amount_paid}</p>
           <p>Amount left to reach goal: {goal.amount_left}</p>
           <p>Category: {goal.category}</p>
+          <p><a href="#" onClick={() => this.props.deleteGoal(goal.id)} >Delete</a></p>
           <form onSubmit={this.props.handlePayment} >
             <input type="text" placeholder="Payment" value={this.props.payment} onChange={this.props.handleChange} />
             <input type="submit" />

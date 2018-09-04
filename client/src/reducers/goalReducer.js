@@ -11,7 +11,6 @@ let goal;
     case 'FETCH_GOALS':
       return {...state, goals: [...state.goals, action.payload], loading: false }
 
-
     case 'ADD_GOAL':
     console.log('adding goal', action.goal)
       goal = {
@@ -24,6 +23,10 @@ let goal;
       }
 
       return { ...state, goals: [...state.goals, goal] }
+
+      case 'DELETE_GOAL':
+      console.log('delete this goal', action.goal)
+       return { ...state, goals: state.goals.filter(goal => goal.id !== action.goal )};
 
     case 'ADD_PAYMENT':
     console.log('adding paymemt')

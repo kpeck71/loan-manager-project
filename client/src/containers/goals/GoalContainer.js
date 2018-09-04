@@ -60,6 +60,7 @@ class GoalContainer extends Component {
       title: '', total: 0, category: ''
     })
   }
+
   // addNewGoal(goal){
   //   this.props.addGoal({title: goal.title, total: goal.total, category: goal.category})
   // }
@@ -84,7 +85,7 @@ class GoalContainer extends Component {
       return (
         <div>
           <GoalInput addGoal={this.props.addGoal} handleChange={this.handleChange} handleGoalSubmit={this.handleGoalSubmit}/>
-          <Goals goals={this.props.goals.goals} addPayment={this.props.addPayment} handleChange={this.handleChange} handlePayment={this.handlePayment}/>
+          <Goals goals={this.props.goals.goals} addPayment={this.props.addPayment} handleChange={this.handleChange} handlePayment={this.handlePayment} deleteGoal={this.props.deleteGoal}/>
         </div>
       )
     }
@@ -95,7 +96,8 @@ const mapStateToProps = state =>  {console.log('state', state.goals); return {go
 const mapDispatchToProps = dispatch => ({
   // fetchGoals: () => dispatch(fetchGoals()),
   addGoal: goal => dispatch({ type: 'ADD_GOAL', goal }),
-  addPayment: payment => dispatch({ type: 'ADD_PAYMENT', payment })
+  addPayment: payment => dispatch({ type: 'ADD_PAYMENT', payment }),
+  deleteGoal: goal => dispatch({ type: 'DELETE_GOAL', goal})
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(GoalContainer);
