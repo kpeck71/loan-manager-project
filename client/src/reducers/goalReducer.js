@@ -12,14 +12,15 @@ let goal;
       return {...state, goals: action.payload, loading: false }
 
     case 'ADD_GOAL':
-    console.log('adding goal', action.goal)
+    console.log('adding goal', action)
+
       goal = {
         id: cuid(),
-        title: action.goal.title,
-        total: action.goal.total,
-        category: action.goal.category,
+        title: action.newGoal.title,
+        total: action.newGoal.total,
+        category: action.newGoal.category,
         amount_paid: 0,
-        amount_left: action.goal.total
+        amount_left: action.newGoal.total
       }
 
       return { ...state, goals: [...state.goals, goal] }

@@ -44,9 +44,6 @@ class GoalContainer extends Component {
 
   componentDidMount(){
     this.props.fetchGoals()
-      // fetch('/api/v1/goals.json')
-      //   .then((response) => {return response.json()})
-      //   .then((data) => {this.setState({ goals: data }) });
     }
 
   // handlePayment = event => {

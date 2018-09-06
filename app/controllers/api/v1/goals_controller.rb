@@ -3,12 +3,13 @@ class Api::V1::GoalsController < ApplicationController
     render json: Goal.all
   end
 
-  def ideas
-  end
-
   def create
-    goal = Goal.create(goal_params)
-    render json: goal
+    goal = Goal.new(goal_params)
+    if goal.save
+      render json: goal
+    else
+      render json: { message: goal.errors }, status: 400
+    end
   end
 
   def destroy
@@ -24,7 +25,7 @@ class Api::V1::GoalsController < ApplicationController
   private
 
   def goal_params
-    params.require(:goal).permid(:id, :title, :amount, :paid, :amount_left, :category)
+    params.require(:goal).permid(:id, :title, :amount, :category)
   end
 
 end

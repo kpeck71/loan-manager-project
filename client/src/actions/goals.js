@@ -5,8 +5,6 @@ export const addPayment = (payment) => {
   };
 };
 
-
-
 export const addGoal = (goal) => {
   return {
     type: 'ADD_GOAL',
@@ -29,15 +27,15 @@ export const deleteGoal = goal => {
 }
 export function createGoal(newGoal) {
   console.log('hi youre in createGoal')
-  return(dispatch) => {
-    dispatch({type: 'LOADING_GOALS'});
-    return fetch('/api/v1/goals.json'), {
+  return function(dispatch) {
+    dispatch({type: 'ADD_GOAL', newGoal})
+    return fetch('/api/v1/goals.json', {
         method: 'POST',
+        body: JSON.stringify({goal: newGoal}),
         headers: {
           'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({goal: newGoal}),
-      }
+        }
+      }).then(response => response.json())
     }
   }
 
