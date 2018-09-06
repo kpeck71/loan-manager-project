@@ -9,7 +9,7 @@ let goal;
       return { ...state, loading: true }
 
     case 'FETCH_GOALS':
-      return {...state, goals: [...state.goals, action.payload], loading: false }
+      return {...state, goals: action.payload, loading: false }
 
     case 'ADD_GOAL':
     console.log('adding goal', action.goal)

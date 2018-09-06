@@ -5,6 +5,8 @@ export const addPayment = (payment) => {
   };
 };
 
+
+
 export const addGoal = (goal) => {
   return {
     type: 'ADD_GOAL',
@@ -25,21 +27,20 @@ export const deleteGoal = goal => {
     goal
   }
 }
+export function createGoal(newGoal) {
+  console.log('hi youre in createGoal')
+  return(dispatch) => {
+    dispatch({type: 'LOADING_GOALS'});
+    return fetch('/api/v1/goals.json'), {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({goal: newGoal}),
+      }
+    }
+  }
 
-// export function createGoal(newGoal) {
-//     return(dispatch) => {
-//       dispatch({type: 'LOADING_GOALS'});
-//       return fetch('/api/v1/goals.json'), {
-//           method: 'POST',
-//           headers: {
-//             'Content-Type': 'application/json'
-//           },
-//           body: JSON.stringify(newGoal),
-//         }.then((response) => {return response.json()})
-//         .then(goal => dispatch({type: 'ADD_GOAL', payload: goal}))
-//     }
-//   }
-//
 export function fetchGoals() {
   return(dispatch) => {
     dispatch({type: 'LOADING_GOALS'});
@@ -47,4 +48,4 @@ export function fetchGoals() {
       .then(response => response.json())
       .then(goals => dispatch({ type: 'FETCH_GOALS', payload: goals }));
     };
-  }
+}

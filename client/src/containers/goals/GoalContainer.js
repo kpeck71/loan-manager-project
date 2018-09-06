@@ -2,20 +2,20 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import GoalInput from '../../components/goals/GoalInput';
 import Goals from '../../components/goals/Goals';
-import { addGoal, addPayment, fetchGoals, deleteGoal } from '../../actions/goals'
+import { addGoal, addPayment, fetchGoals, deleteGoal, createGoal } from '../../actions/goals'
 
 class GoalContainer extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      title: '',
-      total: 0,
-      category: '',
-      payment: ''
-    };
-    this.handleGoalSubmit = this.handleGoalSubmit.bind(this)
+  // constructor(props) {
+    // super(props);
+    // this.state = {
+    //   title: '',
+    //   total: 0,
+    //   category: '',
+    //   payment: ''
+    // };
+    // this.handleGoalSubmit = this.handleGoalSubmit.bind(this)
     // this.addNewGoal = this.addNewGoal.bind(this)
-  }
+  // }
 
   handleChange = event => {
     //arrow functions bind the this value to the function
@@ -29,47 +29,25 @@ class GoalContainer extends Component {
     })
   }
 
-  // componentDidMount() {
-  //   fetchGoals();
-  //   console.log('fetched', this.props)
-  //   }
 
-  handleGoalSubmit(event) {
+    // console.log('submitted new goal')
     // event.preventDefault();
-    // let newGoal = JSON.stringify(
-    //   { title: this.state.title, total: this.state.total, category: this.state.category } )
-    //   console.log(newGoal)
-    //
-    // fetch('/api/v1/goals.json', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   },
-    //     data: newGoal
-    //   })
-    //   .then((response) => response.json())
-    //   .then((goal)=>{
-    //     this.addNewGoal(goal)
-    //   })
-      //success message
-    // }
-    console.log('submitted new goal')
-    event.preventDefault();
-    this.props.addGoal({title: this.state.title, total: this.state.total, category: this.state.category});
-    this.setState({
-      title: '', total: 0, category: ''
-    })
-  }
+    // this.props.addGoal({title: this.state.title, total: this.state.total, category: this.state.category});
+    // this.setState({
+    //   title: '', total: 0, category: ''
+    // })
+  // }
 
   // addNewGoal(goal){
   //   this.props.addGoal({title: goal.title, total: goal.total, category: goal.category})
   // }
 
-  // componentDidMount(){
-  //     fetch('/api/v1/goals.json')
-  //       .then((response) => {return response.json()})
-  //       .then((data) => {this.setState({ goals: data }) });
-  //   }
+  componentDidMount(){
+    this.props.fetchGoals()
+      // fetch('/api/v1/goals.json')
+      //   .then((response) => {return response.json()})
+      //   .then((data) => {this.setState({ goals: data }) });
+    }
 
   // handlePayment = event => {
   //   event.preventDefault();
@@ -84,7 +62,7 @@ class GoalContainer extends Component {
   render() {
       return (
         <div>
-          <GoalInput addGoal={this.props.addGoal} handleChange={this.handleChange} handleGoalSubmit={this.handleGoalSubmit}/>
+          <GoalInput createGoal={this.props.createGoal} handleChange={this.handleChange} handleGoalSubmit={this.handleGoalSubmit}/>
           <Goals goals={this.props.goals.goals} addPayment={this.props.addPayment} handleChange={this.handleChange} handlePayment={this.handlePayment} deleteGoal={this.props.deleteGoal}/>
         </div>
       )
@@ -93,11 +71,5 @@ class GoalContainer extends Component {
 
 const mapStateToProps = state =>  {console.log('state', state.goals); return {goals: state.goals} }
 
-// const mapDispatchToProps = dispatch => ({
-//  fetchGoals: () => dispatch(fetchGoals()),
-//   addGoal: goal => dispatch({ type: 'ADD_GOAL', goal }),
-//   addPayment: payment => dispatch({ type: 'ADD_PAYMENT', payment }),
-//   deleteGoal: goal => dispatch({ type: 'DELETE_GOAL', goal})
-// })
 
-export default connect(mapStateToProps, { addGoal, addPayment, fetchGoals, deleteGoal })(GoalContainer);
+export default connect(mapStateToProps, { addGoal, addPayment, fetchGoals, deleteGoal, createGoal })(GoalContainer);
