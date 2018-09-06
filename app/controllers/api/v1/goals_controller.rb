@@ -18,14 +18,17 @@ class Api::V1::GoalsController < ApplicationController
 
   def update
     goal = Goal.find(params[:id])
-    goal.update_attributes(goal_params)
-    render json: goal
+    if goal.update(goal_params)
+      render json: goal
+    else
+      render json: { message: goal.errors }, status: 400
+    end
   end
 
   private
 
   def goal_params
-    params.require(:goal).permid(:id, :title, :amount, :category)
+    params.require(:goal).permit(:id, :title, :total, :category)
   end
 
 end
