@@ -20,7 +20,7 @@ class GoalInput extends Component {
     })
   }
 
-  handleGoalSubmit(event) {
+  handleGoalSubmit = event => {
     event.preventDefault();
     const newGoal = { title: this.state.title, total: this.state.total, category: this.state.category }
     console.log('lets try this again', newGoal)
@@ -31,7 +31,7 @@ class GoalInput extends Component {
     return (
       <div className="GoalInput">
         <p>Add a New Goal:</p>
-        <form onSubmit={(event) =>this.handleGoalSubmit(event)}>
+        <form onSubmit={this.handleGoalSubmit}>
           <input type="text" placeholder="Title" name="title" value={this.state.title} onChange={this.handleChange}/>
           <input type="number" placeholder="Total Cost" name="total" value={this.state.total} onChange={this.handleChange}/>
           <input type="text" placeholder="Category" name="category" value={this.state.category} onChange={this.handleChange}/>
