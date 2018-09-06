@@ -26,15 +26,12 @@ export const deleteGoal = goal => {
   }
 }
 export function createGoal(newGoal) {
-  console.log('hi youre in createGoal')
+  console.log('hi youre in createGoal', JSON.stringify(newGoal))
   return function(dispatch) {
     dispatch({type: 'ADD_GOAL', newGoal})
     return fetch('/api/v1/goals.json', {
         method: 'POST',
-        body: JSON.stringify({goal: newGoal}),
-        headers: {
-          'Content-Type': 'application/json'
-        }
+        body: JSON.stringify({goal: newGoal})
       }).then(response => response.json())
     }
   }
