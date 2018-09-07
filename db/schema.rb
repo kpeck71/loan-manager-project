@@ -10,13 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_25_011145) do
+ActiveRecord::Schema.define(version: 2018_09_07_131418) do
 
   create_table "budgets", force: :cascade do |t|
     t.float "income"
-    t.text "expense_name"
-    t.text "expense_amount"
-    t.text "expense_category"
+  end
+
+  create_table "expenses", force: :cascade do |t|
+    t.text "name"
+    t.float "amount"
+    t.text "category"
   end
 
   create_table "goals", force: :cascade do |t|
