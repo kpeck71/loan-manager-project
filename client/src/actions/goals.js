@@ -12,6 +12,12 @@ export const addGoal = (goal) => {
   };
 };
 
+export const addExpense = (expense) => {
+  return {
+    type: 'ADD_EXPENSE',
+    expense
+  };
+};
 export const addBudget = (budget) => {
   return {
     type: 'ADD_BUDGET',
