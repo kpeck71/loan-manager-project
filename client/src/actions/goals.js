@@ -74,3 +74,11 @@ export function fetchBudget() {
       .then(budget => dispatch({ type: 'FETCH_BUDGET', payload: budget }));
     };
 }
+
+export function fetchExpenses() {
+  return(dispatch) => {
+    return fetch('/api/v1/expenses.json')
+      .then(response => response.json())
+      .then(expenses => dispatch({ type: 'FETCH_EXPENSES', payload: expenses }));
+    };
+}

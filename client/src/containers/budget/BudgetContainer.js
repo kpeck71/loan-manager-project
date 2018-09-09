@@ -1,62 +1,41 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import BudgetInput from '../../components/budget/BudgetInput'
-import BudgetView from '../../components/budget/BudgetView'
 import ExpenseInput from '../../components/budget/ExpenseInput'
 import ExpensesView from '../../components/budget/ExpensesView'
+import { createExpense, createBudget, fetchBudget, fetchExpenses } from '../../actions/goals'
 
 class BudgetContainer extends Component {
+  componentDidMount() {
+    this.props.fetchBudget(),
+    this.props.fetchExpenses()
+  };
 
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     income: '',
-  //     expense_name: '',
-  //     expense_amount: '',
-  //     expense_category: ''
-  //   }
-  // }
-
-  handleChange = event => {
-    const target = event.target;
-    const value = target.value;
-    const name = target.name;
-    console.log(name)
-    this.setState({
-      [name]: value
-    })
+  expenseAmounts() {
+    let totals = 0
+    let budget = this.props.income
+    this.props.expenses.map((expense) => totals += expense.amount)
+    return budget - totals
   }
-
-
-  handleExpenseSubmit = e => {
-    e.preventDefault();
-    this.props.addExpense({expense_name: this.state.expense_name, expense_amount: this.state.expense_amount, expense_category: this.state.expense_category})
-    this.setState({
-      expense_name: '',
-      expense_amount: '',
-      expense_category: ''
-    })
-  }
-
-
- //  showBudget = props => {
- //   if (this.props.budget > 0) {
- //     return <BudgetView renderBudget={this.renderBudget} budget={this.props.budget} />;
- //   }
- //   return <BudgetInput handleChange={this.handleChange} handleSubmit={this.handleSubmit} addBudget={this.props.addBudget} />;
- // }
 
   render() {
-    let totals = 0;
-    const SPENDING = this.props.expenses.map((expense) => totals += expense.expense_amount)
-    const renderBudget = (this.props.income - SPENDING)
+    const renderExpenses = this.props.expenses.map((expense) => { return expense.name })
+
+
+    // const showBudget = props => {
+    //     if (this.props.income > 0) {
+    //      return <h2>You have this much to work with: {renderBudget}</h2>
+    //    } else {
+    //     return <BudgetInput addBudget={props.addBudget} />; }
+    //  }
 
     return (
       <div>
-        <BudgetInput handleChange={this.handleChange} addBudget={this.props.addBudget} />
-        <p>You have this much to work with: {renderBudget}</p>
-        <ExpenseInput onChange={this.handleChange} handleExpenseSubmit={this.handleExpenseSubmit}/>
+        <BudgetInput createBudget={this.props.createBudget} />
+        <h2>You have this much to work with: {this.expenseAmounts()}</h2>
+        <ExpenseInput handleExpenseSubmit={this.handleExpenseSubmit} createExpense={this.props.createExpense}/>
         <ExpensesView expenses={this.props.expenses} />
+        {renderExpenses}
       </div>
     );
   }
@@ -66,7 +45,10 @@ const mapStateToProps = state => { console.log('state is', state); return { inco
 
 const mapDispatchToProps = dispatch => ({
   addBudget: newBudget => dispatch({ type: 'ADD_BUDGET', newBudget }),
-  addExpense: newExpense => dispatch({ type: 'ADD_EXPENSE', newExpense })
+  createBudget: newBudget => dispatch(createBudget(newBudget)),
+  createExpense: newExpense => dispatch(createExpense(newExpense)),
+  fetchBudget: () => dispatch(fetchBudget()),
+  fetchExpenses: () => dispatch(fetchExpenses())
  })
 
 export default connect(mapStateToProps, mapDispatchToProps)(BudgetContainer);
