@@ -17,7 +17,7 @@ class ExpensesView extends React.Component {
 
   const renderExpenses = this.props.expenses.map((expense) => {
     return(
-      <div className="col-md-3 border border-primary rounded m-2 p-1 mx-auto">
+      <div className="col-md-3 border border-success rounded m-2 p-1 mx-auto">
         <p>{expense.name} | Amount: {expense.amount} | Category: {expense.category} </p>
       </div>)
     })
@@ -27,7 +27,7 @@ return (
     <h3>Expenses:</h3>
     {renderExpenses}
     {!this.state.isHidden && <ExpenseInput />}
-    <button class="btn btn-primary" onClick={this.toggleHidden.bind(this)} type="submit">+</button>
+    <button class="btn btn-outline-success" onClick={this.toggleHidden.bind(this)} type="submit">+</button>
   </div>
   )
 }

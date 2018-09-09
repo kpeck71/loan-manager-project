@@ -5,19 +5,18 @@ import Goals from '../../components/goals/Goals';
 import { addGoal, addPayment, fetchGoals, deleteGoal, createGoal } from '../../actions/goals'
 
 class GoalContainer extends Component {
-  // constructor(props) {
-    // super(props);
-    // this.state = {
-    //   title: '',
-    //   total: 0,
-    //   category: '',
-    //   payment: ''
-    // };
-    // this.handleGoalSubmit = this.handleGoalSubmit.bind(this)
-    // this.addNewGoal = this.addNewGoal.bind(this)
-  // }
 
-  handleChange = event => {
+  state = {
+    isHidden: true
+  }
+
+  toggleHidden () {
+    this.setState({
+      isHidden: !this.state.isHidden
+    })
+  }
+
+  handleChange(event) {
     //arrow functions bind the this value to the function
     event.persist()
     const target = event.target;
@@ -29,38 +28,26 @@ class GoalContainer extends Component {
     })
   }
 
-
-    // console.log('submitted new goal')
-    // event.preventDefault();
-    // this.props.addGoal({title: this.state.title, total: this.state.total, category: this.state.category});
-    // this.setState({
-    //   title: '', total: 0, category: ''
-    // })
-  // }
-
-  // addNewGoal(goal){
-  //   this.props.addGoal({title: goal.title, total: goal.total, category: goal.category})
-  // }
-
   componentDidMount(){
     this.props.fetchGoals()
     }
 
-  // handlePayment = event => {
-  //   event.preventDefault();
-  //   console.log('payment submitted ')
-  //   this.props.addPayment({payment: this.state.payment, goalId: this.props.goal.id, goalTotal: this.props.goal.total})
-  //   this.setState({
-  //     payment: 0
-  //   })
-  // }
-
+  handlePayment = event => {
+    event.preventDefault();
+    console.log('payment submitted ')
+    this.props.addPayment({payment: this.props.payment})
+    this.setState({
+      payment: ''
+    })
+  }
 
   render() {
       return (
         <div>
-          <GoalInput createGoal={this.props.createGoal} handleChange={this.handleChange} handleGoalSubmit={this.handleGoalSubmit}/>
-          <Goals goals={this.props.goals.goals} addPayment={this.props.addPayment} handleChange={this.handleChange} handlePayment={this.handlePayment} deleteGoal={this.props.deleteGoal}/>
+          <Goals goals={this.props.goals.goals} handlePayment={this.handlePayment} addPayment={this.props.addPayment} handleChange={this.handleChange} deleteGoal={this.props.deleteGoal}/>
+            {!this.state.isHidden && <GoalInput createGoal={this.props.createGoal} handleChange={this.handleChange} handleGoalSubmit={this.handleGoalSubmit}/>}
+            <button class="btn btn-outline-success" onClick={this.toggleHidden.bind(this)} type="submit">+New Goal</button>
+
         </div>
       )
     }
