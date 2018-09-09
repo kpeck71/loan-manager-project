@@ -11,7 +11,7 @@ class BudgetContainer extends Component {
     this.props.fetchExpenses()
   };
 
-  expenseAmounts() {
+  calculateBudget() {
     let totals = 0
     let budget = this.props.income
     this.props.expenses.map((expense) => totals += expense.amount)
@@ -19,12 +19,17 @@ class BudgetContainer extends Component {
   }
 
   render() {
-    const renderExpenses = this.props.expenses.map((expense) => { return expense.name })
+    const renderExpenses = this.props.expenses.map((expense) => {
+      return(
+        <div className="col-md-4 border border-primary rounded m-2 p-1 mx-auto">
+          <p>{expense.name} | Amount: {expense.amount} | Category: {expense.category} </p>
+        </div>)
+      })
 
 
     // const showBudget = props => {
-    //     if (this.props.income > 0) {
-    //      return <h2>You have this much to work with: {renderBudget}</h2>
+    //     if (this.props.budget.length > 0) {
+    //      return <h2>You have this much to work with: {this.calculateBudget()} </h2>
     //    } else {
     //     return <BudgetInput addBudget={props.addBudget} />; }
     //  }
@@ -32,7 +37,8 @@ class BudgetContainer extends Component {
     return (
       <div>
         <BudgetInput createBudget={this.props.createBudget} />
-        <h2>You have this much to work with: {this.expenseAmounts()}</h2>
+        <h2>You have this much to work with: {this.calculateBudget()}</h2>
+        <p>Income is {this.props.income} | {this.calculateBudget() - this.props.income} in Expenses</p>
         <ExpenseInput handleExpenseSubmit={this.handleExpenseSubmit} createExpense={this.props.createExpense}/>
         <ExpensesView expenses={this.props.expenses} />
         {renderExpenses}
