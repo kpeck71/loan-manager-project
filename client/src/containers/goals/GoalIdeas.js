@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import Dropdown from 'react-dropdown'
-import 'react-dropdown/style.css'
-import { getAll, getByCategory, getBetweenCost } from '../../data/ideas'
+import Dropdown from 'react-dropdown';
+import Select from 'react-select';
+import 'react-dropdown/style.css';
+import { allIdeas, getByCategory, getBetweenCost } from '../../data/ideas';
 import IdeaBrowser from '../../components/goals/IdeaBrowser'
 
 class GoalIdeas extends Component {
@@ -9,29 +10,22 @@ class GoalIdeas extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      goalIdeas: [],
+      goalIdeas: allIdeas,
       filters: {
         type: 'all'
       }
     }
   }
 
-  onCategoryClick = (e) => {
+  onClick = (e) => {
    const type = this.state.filters.type;
-   // var url = `/data/ideas`;
+   let results = ''
    if (type !== 'all'){
-     // url = `/api/ideas?type=${type}`;
-     const results = getByCategory(type)
-     console.log(type)
-     console.log(results)
+     let results = getByCategory(type)
      this.setState({
        goalIdeas: results
      })
-   }
-
-   // fetch(url)
-   //   .then(response => response.json())
-   //   .then(data => this.setState({ goals: data }));
+    }
    }
 
    onChangeType = (e) => {
@@ -43,20 +37,28 @@ class GoalIdeas extends Component {
    }
 
   render() {
-    const options = [
-    { value: 'charity', label: 'Charity' },
-    { value: 'travel', label: 'Travel' },
-    { value: 'fun', label: 'Fun Stuff' },
+    const typeOptions = [
+      { value: 'charity', label: 'Charity' },
+      { value: 'travel', label: 'Travel' },
+      { value: 'fun', label: 'Fun Stuff' },
     ]
 
-    const defaultOption = "Choose a Category"
+    const amountOptions = [
+      { value: '0 to 25', label: '< $25' },
+      { value: '50 to 75', label: '$50-75' },
+      { value: '100+', label: '$100+' },
+      { value: '300+', label: '$300+' },
+    ]
+
+    const typeOption = "Choose a Category"
+    const amountOption= "Choose an Amount"
 
     return (
       <div className="GoalIdeas">
         <p>What kind of goal do you want to set for yourself?</p>
         <div style={{width: '50%'}} >
-        <Dropdown options={options} onChange={this.onChangeType} value={defaultOption} placeholder="Select an option" />
-        <button onClick={this.onCategoryClick}>Find goals</button>
+          <Select options={typeOptions} onChange={this.onChangeType} value={typeOption} placeholder="Select an option" />
+          <button onClick={this.onClick}>Find goals</button>
         </div>
         <IdeaBrowser goalIdeas={this.state.goalIdeas} />
       </div>
