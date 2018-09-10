@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import logo from './piggy-bank.png';
 import './App.css';
 import NavBar from './components/NavBar'
 
@@ -27,9 +27,9 @@ class App extends Component {
                   <GoalContainer />
                 </React.Fragment> }
                   />
-            <Route exact path="/tips" render={() => <Tips />} />
+                <Route exact path="/tips" component={Tips} />
             <Route exact path='/ideas' render={routerProps => <GoalIdeas />} />
-            <Route exact path='/completed' render={routerProps => <CompletedGoals />} />
+            <Route exact path='/completed' render={routerProps => <CompletedGoals {...routerProps} goals={this.props.goals} />}/>
           </React.Fragment>
         </Router>
 
@@ -39,6 +39,6 @@ class App extends Component {
   }
 }
 
-//move these headlines to the container
+const mapStateToProps = (state) => { return {goals: state.goals} }
 
-export default App;
+export default connect(mapStateToProps)(App);
