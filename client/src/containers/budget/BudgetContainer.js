@@ -35,6 +35,7 @@ class BudgetContainer extends Component {
       <div>
         <BudgetInput createBudget={this.props.createBudget} />
         <h2>You have this much to work with: ${this.calculateBudget()}</h2>
+        <p>Herei s expense total: {this.calculateExpenses()}</p>
         <ExpensesView expenses={this.props.expenses} expenseTotal={this.calculateExpenses()} addExpense={this.props.addExpense} />
       </div>
     );

@@ -35,7 +35,14 @@ render() {
       <form onSubmit={this.handleExpenseSubmit}>
         <input type="text" name="name" value={this.state.name} placeholder="Name" onChange={this.handleChange} />
         <input type="number" name="amount" value={this.state.amount} placeholder="Total" onChange={this.handleChange} />
-        <input type="text" name="category" value={this.state.category} placeholder="Category" onChange={this.handleChange} />
+        <br></br>
+        <select value={this.state.category} onChange={this.handleChange} placeholder="Category">
+          <option value="fun">Fun</option>
+          <option value="essentials">Essentials</option>
+          <option value="credit">Credit</option>
+          <option value="miscellaneous">Miscellaneous</option>
+        </select>
+
         <input type="submit" />
       </form>
     </div>
