@@ -19,7 +19,6 @@ class BudgetInput extends Component {
     const target = event.target;
     const value = target.value;
     const name = target.name;
-    console.log(name)
     this.setState({
       [name]: value
     })

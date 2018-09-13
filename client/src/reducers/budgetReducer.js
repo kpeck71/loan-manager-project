@@ -10,12 +10,13 @@ let budget;
     return { ...state, income: action.newBudget.income }
 
   case 'ADD_EXPENSE':
-  console.log('expense added', action.newExpense)
-  const expense = {
-    name: action.newExpense.name,
-    amount: action.newExpense.amount,
-    category: action.newExpense.category
-  }
+    console.log('expense added', action.newExpense)
+    let expense = {
+      id: cuid(),
+      name: action.newExpense.name,
+      amount: action.newExpense.amount,
+      category: action.newExpense.category
+    }
 
     return { ...state, expenses: [...state.expenses, expense] }
 

@@ -12,6 +12,7 @@ class ExpenseInput extends React.Component {
     const target = event.target;
     const value = target.value;
     const name = target.name;
+    console.log(name)
     this.setState({
       [name]: value
     })
@@ -31,7 +32,7 @@ render() {
   return (
     <div className="col-md-3 border border-primary rounded m-2 p-1 mx-auto">
       <label>Add a New Expense:</label>
-      <form onSubmit={this.props.handleExpenseSubmit}>
+      <form onSubmit={this.handleExpenseSubmit}>
         <input type="text" name="name" value={this.state.name} placeholder="Name" onChange={this.handleChange} />
         <input type="number" name="amount" value={this.state.amount} placeholder="Total" onChange={this.handleChange} />
         <input type="text" name="category" value={this.state.category} placeholder="Category" onChange={this.handleChange} />

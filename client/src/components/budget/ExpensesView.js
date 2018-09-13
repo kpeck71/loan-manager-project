@@ -27,7 +27,7 @@ return (
   <div>
     <h3>Expenses: ${this.props.expenseTotal}</h3>
     <div className="row">{renderExpenses}
-      {!this.state.isHidden && <ExpenseInput />}
+      {!this.state.isHidden && <ExpenseInput addExpense={this.props.addExpense}/>}
       <button class="btn btn-outline-success col-md-1 border border-success rounded m-2 p-1 mx-auto" onClick={this.toggleHidden.bind(this)} type="submit">+</button>
     </div>
   </div>

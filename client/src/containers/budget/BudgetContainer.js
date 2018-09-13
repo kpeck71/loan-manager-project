@@ -35,7 +35,7 @@ class BudgetContainer extends Component {
       <div>
         <BudgetInput createBudget={this.props.createBudget} />
         <h2>You have this much to work with: ${this.calculateBudget()}</h2>
-        <ExpensesView expenses={this.props.expenses} expenseTotal = {this.calculateExpenses()} />
+        <ExpensesView expenses={this.props.expenses} expenseTotal={this.calculateExpenses()} addExpense={this.props.addExpense} />
       </div>
     );
   }
@@ -45,6 +45,7 @@ const mapStateToProps = state => { console.log('state is', state); return { inco
 
 const mapDispatchToProps = dispatch => ({
   addBudget: newBudget => dispatch({ type: 'ADD_BUDGET', newBudget }),
+  addExpense: newExpense => dispatch({ type: 'ADD_EXPENSE', newExpense }),
   createBudget: newBudget => dispatch(createBudget(newBudget)),
   createExpense: newExpense => dispatch(createExpense(newExpense)),
   fetchBudget: () => dispatch(fetchBudget()),
