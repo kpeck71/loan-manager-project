@@ -19,6 +19,7 @@ class GoalIdeas extends Component {
 
   onClick = (e) => {
    const type = this.state.filters.type;
+   console.log('type is ', type)
    let results = ''
    if (type !== 'all'){
      let results = getByCategory(type)
@@ -28,10 +29,12 @@ class GoalIdeas extends Component {
     }
    }
 
-   onChangeType = (e) => {
+   onChangeType = (event) => {
+     // let values = event.map((e) => e.value)
+     let value = event.value
      this.setState({
        filters: {
-         type: e.value,
+         type: value
          }
        }, () => console.log(this.state.filters))
    }
@@ -41,14 +44,12 @@ class GoalIdeas extends Component {
       { value: 'charity', label: 'Charity' },
       { value: 'travel', label: 'Travel' },
       { value: 'fun', label: 'Fun Stuff' },
-    ]
-
-    const amountOptions = [
       { value: '0 to 25', label: '< $25' },
       { value: '50 to 75', label: '$50-75' },
       { value: '100+', label: '$100+' },
       { value: '300+', label: '$300+' },
     ]
+
 
     const typeOption = "Choose a Category"
     const amountOption= "Choose an Amount"
@@ -56,8 +57,8 @@ class GoalIdeas extends Component {
     return (
       <div className="GoalIdeas">
         <p>What kind of goal do you want to set for yourself?</p>
-        <div style={{width: '50%'}} >
-          <Select options={typeOptions} onChange={this.onChangeType} value={typeOption} placeholder="Select an option" />
+        <div>
+          <Select options={typeOptions} onChange={this.onChangeType} placeholder="Select an option" />
           <button onClick={this.onClick}>Find goals</button>
         </div>
         <IdeaBrowser goalIdeas={this.state.goalIdeas} />
