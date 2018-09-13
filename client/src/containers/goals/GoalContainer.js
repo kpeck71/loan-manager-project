@@ -53,7 +53,7 @@ class GoalContainer extends Component {
     }
 }
 
-const mapStateToProps = state =>  {console.log('state', state.goals); return {goals: state.goals} }
+const mapStateToProps = state =>  { return {goals: state.goals} }
 
 
 export default connect(mapStateToProps, { addGoal, addPayment, fetchGoals, deleteGoal, createGoal })(GoalContainer);

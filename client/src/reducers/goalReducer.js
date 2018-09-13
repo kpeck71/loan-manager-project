@@ -12,7 +12,6 @@ let goal;
       return {...state, goals: action.payload, loading: false }
 
     case 'ADD_GOAL':
-    console.log('adding goal', action)
 
       goal = {
         id: cuid(),
@@ -30,9 +29,6 @@ let goal;
        return { ...state, goals: state.goals.filter(goal => goal.id !== action.goal )};
 
     case 'ADD_PAYMENT':
-    console.log('adding paymemt')
-    console.log(state)
-    console.log(action.payment.payment)
       goal = {
         goalId: action.payment.goalId,
         total: action.payment.goalTotal - action.payment.payment
