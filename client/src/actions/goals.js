@@ -26,7 +26,6 @@ export const addBudget = (budget) => {
 };
 
 export function createBudget(newBudget) {
-  console.log('hi youre in createBudget', JSON.stringify(newBudget))
   return function(dispatch) {
     dispatch({type: 'ADD_BUDGET', newBudget})
     return fetch('/api/v1/budgets.json', {
@@ -56,10 +55,17 @@ export const deleteGoal = goal => {
 export function createGoal(newGoal) {
   console.log('hi youre in createGoal', JSON.stringify(newGoal))
   return function(dispatch) {
-    dispatch({type: 'ADD_GOAL', newGoal})
-    return fetch('/api/v1/goals.json', {
+    dispatch({type: 'LOADING_GOALS'});
+    return fetch('/api/v1/goals', {
         method: 'POST',
-        body: JSON.stringify({newGoal})
+        headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
+        body: JSON.stringify({
+          goal: {
+            title: newGoal.title,
+            total: newGoal.total,
+            category: newGoal.category
+          }
+        })
       }).then(response => response.json())
     }
   }
@@ -88,3 +94,14 @@ export function fetchExpenses() {
       .then(expenses => dispatch({ type: 'FETCH_EXPENSES', payload: expenses }));
     };
 }
+
+export function goalPaid(id,status) {
+  return function(dispatch) {
+    dispatch({type: 'GOAL_PAID', id})
+    return fetch(`/api/v1/goals/${id}`, {
+        method: 'PUT',
+        headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
+        body: JSON.stringify({'paid': status})
+      }).then(response => response.json())
+    }
+  }
