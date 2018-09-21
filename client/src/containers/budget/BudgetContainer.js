@@ -11,15 +11,15 @@ class BudgetContainer extends Component {
     this.props.fetchExpenses()
   };
 
-  calculateExpenses() {
-    let expenseTotal = 0
-    this.props.expenses.map((expense) => expenseTotal += expense.amount)
-    return expenseTotal
-  }
+  // calculateExpenses() {
+  //   let expenseTotal = 0
+  //   this.props.expenses.map((expense) => expenseTotal += expense.amount)
+  //   return expenseTotal
+  // }
 
   calculateBudget() {
     let budget = this.props.income
-    return budget - this.calculateExpenses()
+    return budget - this.props.expenseTotal
   }
 
   render() {
@@ -35,13 +35,13 @@ class BudgetContainer extends Component {
       <div>
         <BudgetInput createBudget={this.props.createBudget} />
         <h2>You have this much to work with: ${this.calculateBudget()}</h2>
-        <ExpensesView expenses={this.props.expenses} expenseTotal={this.calculateExpenses()} addExpense={this.props.addExpense} />
+        <ExpensesView expenses={this.props.expenses} expenseTotal={this.props.expenseTotal} addExpense={this.props.addExpense} />
       </div>
     );
   }
 }
 
-const mapStateToProps = state => { return { income: state.budget.income, expenses: state.budget.expenses } }
+const mapStateToProps = state => { return { income: state.budget.income, expenses: state.budget.expenses, expenseTotal: state.budget.expenseTotal } }
 
 const mapDispatchToProps = dispatch => ({
   addBudget: newBudget => dispatch({ type: 'ADD_BUDGET', newBudget }),
