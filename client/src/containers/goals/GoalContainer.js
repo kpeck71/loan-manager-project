@@ -10,7 +10,7 @@ class GoalContainer extends Component {
     isHidden: true
   }
 
-  toggleHidden () {
+  toggleHidden() {
     this.setState({
       isHidden: !this.state.isHidden
     })
@@ -22,7 +22,6 @@ class GoalContainer extends Component {
     const target = event.target;
     const value = target.value;
     const name = target.name;
-    console.log(target)
     this.setState({
       [name]: value
     })
@@ -32,20 +31,12 @@ class GoalContainer extends Component {
     this.props.fetchGoals()
     }
 
-  handlePayment = event => {
-    event.preventDefault();
-    console.log('payment submitted ')
-    this.props.addPayment({payment: this.props.payment})
-    this.setState({
-      payment: ''
-    })
-  }
 
   render() {
       return (
         <div>
-          <Goals goals={this.props.goals.goals} handlePayment={this.handlePayment} addPayment={this.props.addPayment} handleChange={this.handleChange} deleteGoal={this.props.deleteGoal}/>
-            {!this.state.isHidden && <GoalInput createGoal={this.props.createGoal} handleChange={this.handleChange} handleGoalSubmit={this.handleGoalSubmit}/>}
+          <Goals goals={this.props.goals.goals} deleteGoal={this.props.deleteGoal}/>
+            {!this.state.isHidden && <GoalInput createGoal={this.props.createGoal} />}
             <button class="btn btn-outline-success" onClick={this.toggleHidden.bind(this)} type="submit">+New Goal</button>
 
         </div>

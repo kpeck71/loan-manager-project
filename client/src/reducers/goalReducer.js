@@ -14,7 +14,6 @@ let goal;
     case 'ADD_GOAL':
 
       goal = {
-        id: cuid(),
         title: action.newGoal.title,
         total: action.newGoal.total,
         category: action.newGoal.category,
@@ -24,9 +23,8 @@ let goal;
 
       return { ...state, goals: [...state.goals, goal] }
 
-      case 'DELETE_GOAL':
-      console.log('delete this goal', action.goal)
-       return { ...state, goals: state.goals.filter(goal => goal.id !== action.goal )};
+    case 'DELETE_GOAL':
+      return { ...state, goals: state.goals.filter(goal => goal.id !== action.id )};
 
     case 'ADD_PAYMENT':
       goal = {

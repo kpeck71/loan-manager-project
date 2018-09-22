@@ -46,12 +46,14 @@ export function createExpense(newExpense) {
     }
   }
 
-export const deleteGoal = goal => {
-  return {
-    type: 'DELETE_GOAL',
-    goal
-  }
-}
+export function deleteGoal(id) {
+  return function(dispatch) {
+    return fetch(`/api/v1/goals/${id})`, {
+      method: 'DELETE',
+    }).then((response) => { console.log('Goal was deleted!')
+  }).then(response => dispatch({ type: 'DELETE_GOAL', id }))
+}}
+
 export function createGoal(newGoal) {
   console.log('hi youre in createGoal', JSON.stringify(newGoal))
   return function(dispatch) {
@@ -67,6 +69,7 @@ export function createGoal(newGoal) {
           }
         })
       }).then(response => response.json())
+      .then(newGoal => dispatch({ type: 'ADD_GOAL', newGoal }));
     }
   }
 
@@ -95,8 +98,9 @@ export function fetchExpenses() {
     };
 }
 
-export function goalPaid(id,status) {
+export function goalPaid(id, status) {
   return function(dispatch) {
+    debugger
     dispatch({type: 'GOAL_PAID', id})
     return fetch(`/api/v1/goals/${id}`, {
         method: 'PUT',
