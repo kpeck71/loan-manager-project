@@ -27,11 +27,18 @@ export const addBudget = (budget) => {
 
 export function createBudget(newBudget) {
   return function(dispatch) {
-    dispatch({type: 'ADD_BUDGET', newBudget})
-    return fetch('/api/v1/budgets.json', {
+    debugger
+    dispatch({type: 'LOADING_BUDGET'});
+    return fetch('/api/v1/budgets', {
         method: 'POST',
-        body: JSON.stringify({newBudget})
+        headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
+        body: JSON.stringify({
+          budget: {
+            income: newBudget.income
+          }
+        })
       }).then(response => response.json())
+      .then(response => dispatch({ type: 'ADD_BUDGET', newBudget }));
     }
   }
 
@@ -46,16 +53,7 @@ export function createExpense(newExpense) {
     }
   }
 
-export function deleteGoal(id) {
-  return function(dispatch) {
-    return fetch(`/api/v1/goals/${id})`, {
-      method: 'DELETE',
-    }).then((response) => { console.log('Goal was deleted!')
-  }).then(response => dispatch({ type: 'DELETE_GOAL', id }))
-}}
-
 export function createGoal(newGoal) {
-  console.log('hi youre in createGoal', JSON.stringify(newGoal))
   return function(dispatch) {
     dispatch({type: 'LOADING_GOALS'});
     return fetch('/api/v1/goals', {
@@ -72,6 +70,8 @@ export function createGoal(newGoal) {
       .then(newGoal => dispatch({ type: 'ADD_GOAL', newGoal }));
     }
   }
+
+// FETCH
 
 export function fetchGoals() {
   return(dispatch) => {
@@ -98,6 +98,8 @@ export function fetchExpenses() {
     };
 }
 
+// UPDATE ITEMS
+
 export function goalPaid(id, status) {
   return function(dispatch) {
     debugger
@@ -109,3 +111,13 @@ export function goalPaid(id, status) {
       }).then(response => response.json())
     }
   }
+
+//DELETE ITEMS
+
+  export function deleteGoal(id) {
+    return function(dispatch) {
+      return fetch(`/api/v1/goals/${id})`, {
+        method: 'DELETE',
+      }).then((response) => { console.log('Goal was deleted!')
+    }).then(response => dispatch({ type: 'DELETE_GOAL', id }))
+  }}
