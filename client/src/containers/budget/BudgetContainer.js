@@ -3,19 +3,13 @@ import { connect } from 'react-redux'
 import BudgetInput from '../../components/budget/BudgetInput'
 import ExpenseInput from '../../components/budget/ExpenseInput'
 import ExpensesView from '../../components/budget/ExpensesView'
-import { createExpense, createBudget, fetchBudget, fetchExpenses, addExpense } from '../../actions/goals'
+import { createExpense, updateBudget, fetchBudget, fetchExpenses, addExpense } from '../../actions/goals'
 
 class BudgetContainer extends Component {
   componentDidMount() {
     this.props.fetchBudget(),
     this.props.fetchExpenses()
   };
-
-  // calculateExpenses() {
-  //   let expenseTotal = 0
-  //   this.props.expenses.map((expense) => expenseTotal += expense.amount)
-  //   return expenseTotal
-  // }
 
   calculateBudget() {
     let budget = this.props.income
@@ -33,7 +27,7 @@ class BudgetContainer extends Component {
 
     return (
       <div>
-        <BudgetInput createBudget={this.props.createBudget} />
+        <BudgetInput updateBudget={this.props.updateBudget} income={this.props.income} />
         <h2>You have this much to work with: ${this.calculateBudget()}</h2>
         <ExpensesView expenses={this.props.expenses} expenseTotal={this.props.expenseTotal} addExpense={this.props.addExpense} />
       </div>
@@ -44,9 +38,8 @@ class BudgetContainer extends Component {
 const mapStateToProps = state => { return { income: state.budget.income, expenses: state.budget.expenses, expenseTotal: state.budget.expenseTotal } }
 
 const mapDispatchToProps = dispatch => ({
-  addBudget: newBudget => dispatch({ type: 'ADD_BUDGET', newBudget }),
   addExpense: newExpense => dispatch({ type: 'ADD_EXPENSE', newExpense }),
-  createBudget: newBudget => dispatch(createBudget(newBudget)),
+  updateBudget: newBudget => dispatch(updateBudget(newBudget)),
   createExpense: newExpense => dispatch(createExpense(newExpense)),
   fetchBudget: () => dispatch(fetchBudget()),
   fetchExpenses: () => dispatch(fetchExpenses())

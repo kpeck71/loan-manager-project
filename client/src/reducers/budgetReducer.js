@@ -5,7 +5,7 @@ export default function budgetReducer(state = { income: '', expenses: [], expens
 let budget;
 let expenseTotalSum;
   switch (action.type) {
-  case 'ADD_BUDGET':
+  case 'UPDATE_BUDGET':
     return { ...state, income: action.newBudget.income }
 
   case 'ADD_EXPENSE':

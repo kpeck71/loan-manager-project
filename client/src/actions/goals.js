@@ -18,19 +18,12 @@ export const addExpense = (expense) => {
     expense
   };
 };
-export const addBudget = (budget) => {
-  return {
-    type: 'ADD_BUDGET',
-    budget
-  };
-};
 
-export function createBudget(newBudget) {
+export function updateBudget(newBudget) {
   return function(dispatch) {
-    debugger
     dispatch({type: 'LOADING_BUDGET'});
-    return fetch('/api/v1/budgets', {
-        method: 'POST',
+    return fetch(`/api/v1/budgets/3`, {
+        method: 'PUT',
         headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
         body: JSON.stringify({
           budget: {
@@ -38,7 +31,7 @@ export function createBudget(newBudget) {
           }
         })
       }).then(response => response.json())
-      .then(response => dispatch({ type: 'ADD_BUDGET', newBudget }));
+      .then(response => dispatch({ type: 'UPDATE_BUDGET', newBudget }));
     }
   }
 
