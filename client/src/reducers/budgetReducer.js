@@ -10,7 +10,7 @@ let expenseTotalSum;
 
   case 'ADD_EXPENSE':
     let expense = {
-      id: cuid(),
+      // id: cuid(),
       name: action.newExpense.name,
       amount: action.newExpense.amount,
       category: action.newExpense.category
@@ -18,6 +18,10 @@ let expenseTotalSum;
     expenseTotalSum = parseFloat(state.expenseTotal) + parseFloat(expense.amount);
 
     return { ...state, expenses: [...state.expenses, expense], expenseTotal: expenseTotalSum }
+
+  case 'DELETE_EXPENSE':
+    return { ...state, expenses: state.expenses.filter(expense => expense.id !== action.id )};
+    expenseTotalSum = parseFloat(state.expenseTotal) + parseFloat(expense.amount);
 
   case 'FETCH_BUDGET':
     let budget = action.payload

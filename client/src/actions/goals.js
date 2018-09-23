@@ -38,11 +38,19 @@ export function updateBudget(newBudget) {
 export function createExpense(newExpense) {
   console.log('hi youre in createExpense', JSON.stringify(newExpense))
   return function(dispatch) {
-    dispatch({type: 'ADD_EXPENSE', newExpense})
-    return fetch('/api/v1/expenses.json', {
+    debugger
+    return fetch('/api/v1/expenses', {
         method: 'POST',
-        body: JSON.stringify({newExpense})
+        headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
+        body: JSON.stringify({
+          expense: {
+            name: newExpense.name,
+            amount: newExpense.amount,
+            category: newExpense.category
+          }
+        })
       }).then(response => response.json())
+        .then(newExpense => dispatch({ type: 'ADD_EXPENSE', newExpense }));
     }
   }
 
@@ -112,5 +120,16 @@ export function goalPaid(id, status) {
       return fetch(`/api/v1/goals/${id})`, {
         method: 'DELETE',
       }).then((response) => { console.log('Goal was deleted!')
-    }).then(response => dispatch({ type: 'DELETE_GOAL', id }))
+      }).then(response => dispatch({ type: 'DELETE_GOAL', id }))
+    }
+  }
+
+
+  export function deleteExpense(id) {
+    debugger
+    return function(dispatch) {
+      return fetch(`/api/v1/expenses/${id})`, {
+        method: 'DELETE',
+      }).then((response) => { console.log('Expense was deleted!')
+    }).then(response => dispatch({ type: 'DELETE_EXPENSE', id }))
   }}
