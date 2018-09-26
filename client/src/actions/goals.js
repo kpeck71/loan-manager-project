@@ -125,11 +125,10 @@ export function goalPaid(id, status) {
   }
 
 
-  export function deleteExpense(id) {
-    debugger
+  export function deleteExpense(expense) {
     return function(dispatch) {
-      return fetch(`/api/v1/expenses/${id})`, {
+      return fetch(`/api/v1/expenses/${expense.id})`, {
         method: 'DELETE',
       }).then((response) => { console.log('Expense was deleted!')
-    }).then(response => dispatch({ type: 'DELETE_EXPENSE', id }))
+    }).then(response => dispatch({ type: 'DELETE_EXPENSE', expense }))
   }}
