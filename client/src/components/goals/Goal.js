@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { goalPaid } from '../../actions/goals'
+import { createGoal, goalPaid } from '../../actions/goals'
 
 class Goal extends Component {
   state = {
-    paidClass: false
+    paidClass: '',
+    added: false
   }
 
   paidClass() {
@@ -16,6 +17,11 @@ class Goal extends Component {
   handleChange = event =>{
     this.props.goalPaid(this.props.goal.id, event.target.value)
     this.paidClass()
+  }
+
+  handleAdd = goal => {
+    console.log(goal)
+    this.props.createGoal(goal);
   }
 
   render() {
@@ -31,10 +37,11 @@ class Goal extends Component {
           <form>
             Complete? <input name="paid" type="checkbox" value={ !goal.paid } defaultChecked = {goal.paid === true } onChange={this.handleChange} />
           </form>
+          <a href="#" onClick={() => this.handleAdd(goal)}>Add to your goals?</a>
         </div>
       )
 
   }
 };
 
-export default connect(null, { goalPaid })(Goal);
+export default connect(null, { createGoal, goalPaid })(Goal);
