@@ -24,7 +24,7 @@ let expenseTotalSum;
     return { ...state, expenses: [...state.expenses, expense], expenseTotal: expenseTotalSum }
 
   case 'DELETE_EXPENSE':
-    expenseTotalSum = parseFloat(state.expenseTotal) + parseFloat(action.expense.amount);
+    expenseTotalSum = parseFloat(state.expenseTotal) - parseFloat(action.expense.amount);
 
     return { ...state, expenses: state.expenses.filter(expense => expense.id !== action.expense.id), expenseTotal: expenseTotalSum };
 
