@@ -10,7 +10,7 @@ const NavBar = () => {
         <img src={logo} className="App-logo" alt="logo" />
         <h1 className="App-title">Welcome to a Better Budget</h1>
 
-      <div style={{ borderBottom: '2px solid white', paddingBottom: '10px', marginBottom: '12px' }}>
+      <div>
         <NavLink
           style={{ marginRight: '10px' }}
           to="/"

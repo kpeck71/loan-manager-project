@@ -17,10 +17,10 @@ class ExpensesView extends React.Component {
 
   const renderExpenses = this.props.expenses.map((expense) => {
     return(
-      <div className="col-md-3 border border-success rounded m-2 p-1 mx-5">
+      <div className="col-md-3 border border-warning rounded m-2 p-1 mx-5">
         <h2><span class="badge badge-secondary">{expense.name}</span></h2>
         <p> Amount: {expense.amount} | Category: {expense.category} </p>
-        <p><a href="#" onClick={() => this.props.deleteExpense(expense)}>Delete</a></p>
+        <p><a href="#" id="delete" onClick={() => this.props.deleteExpense(expense)}>Delete</a></p>
       </div>)
     })
 

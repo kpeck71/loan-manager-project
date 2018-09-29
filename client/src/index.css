@@ -1,5 +1,38 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans|Source+Sans+Pro');
+
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  font-family: 'Open Sans', sans-serif;
+  color: #374353;
 }
+
+a {
+  color: #25BEA0;
+}
+
+h3 {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 600;
+  color: #374353;
+}
+
+h4 {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
+  color: #374353;
+}
+
+#delete {
+  color: #be4425;
+  font-weight: bold;
+}
+
+.ExpenseClass {
+
+};
+
+.PaidClass {
+  background-color: green;
+
+};
