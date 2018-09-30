@@ -96,7 +96,6 @@ export function goalPaid(id, status) {
   console.log('id is:', id)
   console.log('status is:', status)
   return(dispatch) => {
-    debugger
     return fetch(`/api/v1/goals/${id}`, {
         method: 'PUT',
         headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
