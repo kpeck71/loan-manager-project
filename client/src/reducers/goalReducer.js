@@ -12,7 +12,6 @@ let goal;
       return {...state, goals: action.payload, loading: false }
 
     case 'ADD_GOAL':
-
       goal = {
         title: action.newGoal.title,
         total: action.newGoal.total,

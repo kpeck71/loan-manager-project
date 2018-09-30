@@ -5,16 +5,13 @@ import './App.css';
 import NavBar from './components/NavBar';
 import GoalContainer from './containers/GoalContainer';
 import BudgetContainer from './containers/BudgetContainer';
-import { fetchGoals, fetchBudget, fetchExpenses } from './actions/goals'
+import GoalIdeas from './containers/GoalIdeas';
+import Status from './components/Status';
+import CompletedGoals from './components/CompletedGoals';
+
 
 
 class App extends Component {
-
-  componentDidMount(){
-    this.props.fetchGoals(),
-    this.props.fetchBudget(),
-    this.props.fetchExpenses()
-  }
 
   render() {
     return (
@@ -25,9 +22,12 @@ class App extends Component {
             <Route exact path='/' render={routerProps =>
                 <React.Fragment>
                   <BudgetContainer budget={this.props.budget} />
-                  <GoalContainer {...routerProps} goals={this.props.goals.goals}/>
+                  <GoalContainer goals={this.props.goals.goals}/>
                 </React.Fragment>
               }/>
+            <Route exact path='/status' component={Status} />
+            <Route exact path='/completed' render={routerProps => <CompletedGoals {...routerProps} goals={this.props.goals.goals} />}/>
+            <Route exact path='/ideas' component={GoalIdeas} />
           </React.Fragment>
         </Router>
 
@@ -39,4 +39,4 @@ class App extends Component {
 
 const mapStateToProps = (state) => { return {goals: state.goals, budget: state.budget} }
 
-export default connect(mapStateToProps,{ fetchGoals, fetchBudget, fetchExpenses })(App);
+export default connect(mapStateToProps)(App);

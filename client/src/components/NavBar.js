@@ -17,15 +17,16 @@ const NavBar = () => {
         >
           Home
         </NavLink>
-        <NavLink
-          style={{ marginRight: '10px' }}
-          to="/tips">
-          Tips
-        </NavLink>
+
         <NavLink
           style={{ marginRight: '10px' }}
           to="/ideas">
           Ideas
+        </NavLink>
+        <NavLink
+          style={{ marginRight: '10px' }}
+          to="/status">
+          Status
         </NavLink>
         <NavLink
           style={{ marginRight: '10px' }}
