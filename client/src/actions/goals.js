@@ -93,14 +93,13 @@ export function fetchExpenses() {
 // UPDATE ITEMS
 
 export function goalPaid(id, status) {
-  console.log('id is:', id)
-  console.log('status is:', status)
   return(dispatch) => {
     return fetch(`/api/v1/goals/${id}`, {
         method: 'PUT',
         headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
         body: JSON.stringify({'paid': status})
       }).then(response => response.json())
+      .then(goal => dispatch({type: 'UPDATE_GOAL', goal}))
     }
   }
 

@@ -46,7 +46,6 @@ const CardContainer = props => {
           <h4>{goal.title}</h4>
           <p>Total: {goal.total}</p>
           <p>Category: {goal.category}</p>
-          <p>Date paid: TBD</p>
           <a href="#" onClick={() => goalPaid(goal.id, false)}>Add to active goals?</a>
        </div>
       )
@@ -58,7 +57,7 @@ const CardContainer = props => {
           <h4>{goal.title}</h4>
           <p>Total: {goal.total}</p>
           <p>Category: {goal.category}</p>
-          <a href="#" onClick={() => createGoal(goal)}>Add to your goals?</a>
+          <a href="#" onClick={() => props.createGoal(goal)}>Add to your goals?</a>
         </div>
       )
     }
