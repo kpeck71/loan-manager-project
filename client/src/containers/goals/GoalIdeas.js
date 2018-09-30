@@ -3,6 +3,7 @@ import Dropdown from 'react-dropdown';
 import Select from 'react-select';
 import 'react-dropdown/style.css';
 import { allIdeas, getByCategory, getBetweenCost } from '../../data/ideas';
+import { createGoal } from '../../actions/goals'
 import IdeaBrowser from '../../components/goals/IdeaBrowser'
 
 class GoalIdeas extends Component {
@@ -17,7 +18,7 @@ class GoalIdeas extends Component {
     }
   }
 
-  onClick = (e) => {
+  onClick = (event) => {
    const type = this.state.filters.type;
    console.log('type is ', type)
    let results = ''
@@ -39,6 +40,11 @@ class GoalIdeas extends Component {
        }, () => console.log(this.state.filters))
    }
 
+
+     handleAdd = goal => {
+       this.props.createGoal(goal);
+     }
+
   render() {
     const typeOptions = [
       { value: 'charity', label: 'Charity' },
@@ -56,10 +62,9 @@ class GoalIdeas extends Component {
 
     return (
       <div className="GoalIdeas">
-        <p>What kind of goal do you want to set for yourself?</p>
-        <div>
-          <Select options={typeOptions} onChange={this.onChangeType} placeholder="Select an option" />
-          <button onClick={this.onClick}>Find goals</button>
+        <div style={{width: '35%', margin: 'auto', padding: '5px'}}>
+          <Select options={typeOptions} onChange={this.onChangeType} placeholder="What kind of goal do you want to set for yourself?"/>
+          <button style={{marginTop: 10}} onClick={this.onClick}>Find goals</button>
         </div>
         <IdeaBrowser goalIdeas={this.state.goalIdeas} />
       </div>

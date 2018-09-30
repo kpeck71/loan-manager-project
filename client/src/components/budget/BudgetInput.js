@@ -44,7 +44,7 @@ class BudgetInput extends Component {
     if (this.props.income < 0) {
       return (
         <div>First things first - how much do you have to spend each month?
-          this.budgetForm()
+          {this.budgetForm()}
         </div>
       )
     } else {

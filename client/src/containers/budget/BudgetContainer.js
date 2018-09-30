@@ -43,7 +43,8 @@ class BudgetContainer extends Component {
     this.setState({
       name: '',
       amount: '',
-      category: ''
+      category: '',
+      isHidden: true
     })
   }
 

@@ -36,9 +36,7 @@ export function updateBudget(newBudget) {
   }
 
 export function createExpense(newExpense) {
-  console.log('hi youre in createExpense', JSON.stringify(newExpense))
   return function(dispatch) {
-    debugger
     return fetch('/api/v1/expenses', {
         method: 'POST',
         headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
@@ -56,7 +54,7 @@ export function createExpense(newExpense) {
 
 export function createGoal(newGoal) {
   return function(dispatch) {
-    dispatch({type: 'LOADING_GOALS'});
+    // dispatch({type: 'LOADING_GOALS'});
     return fetch('/api/v1/goals', {
         method: 'POST',
         headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
@@ -102,8 +100,9 @@ export function fetchExpenses() {
 // UPDATE ITEMS
 
 export function goalPaid(id, status) {
+  console.log('id is:', id)
+  console.log('status is:', status)
   return function(dispatch) {
-    debugger
     dispatch({type: 'GOAL_PAID', id})
     return fetch(`/api/v1/goals/${id}`, {
         method: 'PUT',
@@ -112,6 +111,8 @@ export function goalPaid(id, status) {
       }).then(response => response.json())
     }
   }
+
+
 
 //DELETE ITEMS
 

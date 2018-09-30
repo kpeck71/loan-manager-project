@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import Goal from './Goal';
+import CardCreator from '../CardCreator'
 
-class Goals extends Component {
+const Goals = props => {
 
-
-render() {
-const renderGoals = this.props.goals.map((goal) => {
-  return <Goal goal={goal} goalId={goal.id} handlePayment={this.props.handlePayment} deleteGoal={this.props.deleteGoal} />
+const renderGoals = props.goals.map((goal) => {
+  return <CardCreator goal={goal} cardDetails="goalCard" completeGoal={true} deleteCard={true} goalId={goal.id} handleComplete={props.handleComplete} deleteGoal={props.deleteGoal} />
   });
 
     return (
@@ -20,5 +19,4 @@ const renderGoals = this.props.goals.map((goal) => {
       </div>
      )
   }
-}
 export default Goals;
