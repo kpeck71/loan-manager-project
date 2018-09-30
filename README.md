@@ -1,24 +1,13 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+**Budget Manager**
+This application is used to help manage monthly expenses, short- and long-term goals, and monthly budget. Find new goal ideas and [COMING SOON] recommendations on better ways to manage your budget.
 
-Things you may want to cover:
 
-* Ruby version
+**Installation**
+cd loan-manager-project
+rails db:migrate
+rails s -p 3001
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+cd client
+npm install && npm start
