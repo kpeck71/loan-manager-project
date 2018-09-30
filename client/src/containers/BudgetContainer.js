@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import CardCreator from '../components/CardCreator';
-import { fetchBudget, fetchExpenses, deleteExpense, createExpense } from '../actions/goals'
+import BudgetInput from './BudgetInput'
+import { fetchBudget, fetchExpenses, updateBudget, deleteExpense, createExpense } from '../actions/goals'
 
 
 class BudgetContainer extends Component {
@@ -59,11 +60,11 @@ render() {
     return (
       <React.Fragment>
         <div className="budgetGroup">
-          <p>Income: ${this.props.budget.income}| Expenses: ${this.props.budget.expenseTotal} </p>
+          <BudgetInput updateBudget={this.props.updateBudget} income={this.props.budget.income} />
           <h2>You have ${this.calculateBudget()} to spend.</h2>
         </div>
         <div className="expenseGroup">
-          <h3>Current Expenses:</h3>
+          <h3>Current Expenses: ${this.props.budget.expenseTotal}</h3>
           <div className="container-fluid">
             <button class="btn btn-outline-info" onClick={this.toggleHidden.bind(this)} type="submit">New Expense</button>
             <div className="row">
@@ -79,4 +80,4 @@ render() {
 
 
 
-export default connect(null, { fetchBudget, fetchExpenses, deleteExpense, createExpense })(BudgetContainer)
+export default connect(null, { fetchBudget, fetchExpenses, updateBudget, deleteExpense, createExpense })(BudgetContainer)
