@@ -9,8 +9,6 @@ import GoalIdeas from './containers/GoalIdeas';
 import Status from './components/Status';
 import CompletedGoals from './components/CompletedGoals';
 
-
-
 class App extends Component {
 
   render() {

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { createGoal, goalPaid, deleteExpense } from '../actions/goals'
 
@@ -8,6 +8,15 @@ const CardContainer = props => {
   let className=`col-md-3 border border-${borderColor} rounded p-2 m-2 mx-5`
   // let backgroundColor = 'lightgrey'
 
+//   function Card({style, className='', ...rest}) {
+//   return (
+//     <div
+//       className={`col-md-3 border border-${className} rounded p-2 m-2 mx-5`}
+//       style={{paddingTop: 10, ...style}}
+//       {...rest}
+//       />
+//   )
+// }
 
   function renderCard() {
     const goal = props.goal
