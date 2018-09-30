@@ -2,18 +2,19 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import './App.css';
-import NavBar from './components/NavBar'
-
-import GoalContainer from './containers/goals/GoalContainer'
-import Goals from './components/goals/Goals'
-import GoalIdeas from './containers/goals/GoalIdeas'
-import Tips from './components/goals/Tips'
-import CompletedGoals from './containers/goals/CompletedGoals'
-
-import BudgetContainer from './containers/budget/BudgetContainer'
+import NavBar from './components/NavBar';
+import GoalContainer from './containers/GoalContainer';
+import BudgetContainer from './containers/BudgetContainer';
+import { fetchGoals, fetchBudget, fetchExpenses } from './actions/goals'
 
 
 class App extends Component {
+
+  componentDidMount(){
+    this.props.fetchGoals(),
+    this.props.fetchBudget(),
+    this.props.fetchExpenses()
+  }
 
   render() {
     return (
@@ -21,15 +22,12 @@ class App extends Component {
         <Router>
           <React.Fragment>
             <NavBar />
-            <Route exact path="/" render={() =>
+            <Route exact path='/' render={routerProps =>
                 <React.Fragment>
-                  <BudgetContainer />
-                  <GoalContainer />
-                </React.Fragment> }
-                  />
-                <Route exact path="/tips" component={Tips} />
-            <Route exact path='/ideas' render={routerProps => <GoalIdeas />} />
-            <Route exact path='/completed' render={routerProps => <CompletedGoals {...routerProps} goals={this.props.goals} />}/>
+                  <BudgetContainer budget={this.props.budget} />
+                  <GoalContainer {...routerProps} goals={this.props.goals}/>
+                </React.Fragment>
+              }/>
           </React.Fragment>
         </Router>
 
@@ -39,6 +37,6 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = (state) => { return {goals: state.goals} }
+const mapStateToProps = (state) => { return {goals: state.goals, budget: state.budget} }
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps,{ fetchGoals, fetchBudget, fetchExpenses })(App);

@@ -32,7 +32,7 @@ const CardContainer = props => {
           <p>Total: {goal.total}</p>
           <p>Category: {goal.category}</p>
           <p>Date paid: TBD</p>
-          <a href="#" onClick={() => createGoal(goal)}>Add back to your active goals?</a>
+          <a href="#" onClick={() => goalPaid(goal.id, false)}>Add to active goals?</a>
        </div>
       )
     }

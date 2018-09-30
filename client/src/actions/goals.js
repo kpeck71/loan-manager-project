@@ -1,10 +1,3 @@
-export const addPayment = (payment) => {
-  return {
-    type: 'ADD_PAYMENT',
-    payment
-  };
-};
-
 export const addGoal = (goal) => {
   return {
     type: 'ADD_GOAL',
@@ -102,8 +95,8 @@ export function fetchExpenses() {
 export function goalPaid(id, status) {
   console.log('id is:', id)
   console.log('status is:', status)
-  return function(dispatch) {
-    dispatch({type: 'GOAL_PAID', id})
+  return(dispatch) => {
+    debugger
     return fetch(`/api/v1/goals/${id}`, {
         method: 'PUT',
         headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
@@ -111,8 +104,6 @@ export function goalPaid(id, status) {
       }).then(response => response.json())
     }
   }
-
-
 
 //DELETE ITEMS
 
