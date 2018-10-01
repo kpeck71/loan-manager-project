@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class BudgetInput extends Component {
 
   state = {
-    income: this.props.income,
+    income: '',
     isHidden: true
   }
 
@@ -39,7 +39,7 @@ class BudgetInput extends Component {
   }
 
   budgetView() {
-    if (this.props.income < 0) {
+    if (this.props.income <= 0) {
       return (
         <div>First things first - how much do you have to spend each month?
           {this.budgetForm()}
@@ -54,7 +54,6 @@ class BudgetInput extends Component {
       )
     }
   }
-
 
   render() {
     return (

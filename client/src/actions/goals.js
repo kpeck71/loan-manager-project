@@ -15,7 +15,7 @@ export const addExpense = (expense) => {
 export function updateBudget(newBudget) {
   return function(dispatch) {
     dispatch({type: 'LOADING_BUDGET'});
-    return fetch(`/api/v1/budgets/3`, {
+    return fetch(`/api/v1/budgets/4`, {
         method: 'PUT',
         headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
         body: JSON.stringify({

@@ -10,11 +10,11 @@ let budget;
 let expenseTotalSum;
   switch (action.type) {
   case 'UPDATE_BUDGET':
+  debugger
     return { ...state, income: action.newBudget.income }
 
   case 'ADD_EXPENSE':
     let expense = {
-      // id: cuid(),
       name: action.newExpense.name,
       amount: action.newExpense.amount,
       category: action.newExpense.category
@@ -27,7 +27,6 @@ let expenseTotalSum;
     expenseTotalSum = parseFloat(state.expenseTotal) - parseFloat(action.expense.amount);
 
     return { ...state, expenses: state.expenses.filter(expense => expense.id !== action.expense.id), expenseTotal: expenseTotalSum };
-
 
   case 'FETCH_BUDGET':
     let budget = action.payload

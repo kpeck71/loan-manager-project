@@ -7,7 +7,7 @@ const CompletedGoals = props  => {
 
   const renderGoals =
     completedGoals.map((goal) => {
-      return <CardCreator goal={goal} cardDetails="goalCard" goalId={goal.id}  />
+      return <CardCreator goal={goal} cardDetails="completedGoal" />
     });
 
   return (

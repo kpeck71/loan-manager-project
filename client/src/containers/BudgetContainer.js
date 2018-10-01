@@ -78,6 +78,6 @@ render() {
   }
 }
 
+const mapStateToProps = state => { return { budget: state.budget }}
 
-
-export default connect(null, { fetchBudget, fetchExpenses, updateBudget, deleteExpense, createExpense })(BudgetContainer)
+export default connect(mapStateToProps, { fetchBudget, fetchExpenses, updateBudget, deleteExpense, createExpense })(BudgetContainer)
