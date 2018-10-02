@@ -8,6 +8,7 @@ class Goal extends Component {
     super(props)
     this.state = {
       counter: props.goal.counter || 0,
+      paid: props.goal.paid
     }
   }
 
@@ -35,6 +36,7 @@ class Goal extends Component {
           <p>Counter: {this.state.counter}</p>
           <button onClick={this.onCounterClick} value={this.props.goal.id}>++</button>
           <button onClick={()=>this.props.deleteGoal(this.props.goal)}>Delete</button>
+          <button onClick={()=>this.props.goalPaid(this.props.goal, !this.props.goal.paid)}>Complete?</button>
         </div>
       )
     }
