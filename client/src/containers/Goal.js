@@ -28,15 +28,17 @@ class Goal extends Component {
   }
 
     render() {
+      const renderButton = <button onClick={this.onCounterClick} value={this.props.goal.id}>++</button>
+
       return (
         <div className="col-md-3 border rounded p-2 m-2 mx-5 border-info">
           <h4>{this.props.goal.title}</h4>
           <p>Total: {this.props.goal.total}</p>
           <p>Category: {this.props.goal.category}</p>
           <p>Counter: {this.state.counter}</p>
-          <button onClick={this.onCounterClick} value={this.props.goal.id}>++</button>
+          {(this.props.goal.paid === true) && <button onClick={this.onCounterClick} value={this.props.goal.id}>++</button> }
           <button onClick={()=>this.props.deleteGoal(this.props.goal)}>Delete</button>
-          <button onClick={()=>this.props.goalPaid(this.props.goal, !this.props.goal.paid)}>Complete?</button>
+          <button onClick={()=>this.props.goalPaid(this.props.goal, !this.props.goal.paid)}>Completed Toggle</button>
         </div>
       )
     }
