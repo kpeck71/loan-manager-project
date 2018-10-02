@@ -30,7 +30,7 @@ class Api::V1::GoalsController < ApplicationController
 
   def goal_params
     # params.permit(:title, :total, :category, :paid)
-    params.require(:goal).permit(:title, :total, :category, :paid)
+    params.require(:goal).permit(:title, :total, :category, :paid, :counter)
 
   end
 

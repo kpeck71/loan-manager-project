@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_07_131418) do
+ActiveRecord::Schema.define(version: 2018_10_01_180201) do
 
   create_table "budgets", force: :cascade do |t|
     t.float "income"
@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 2018_09_07_131418) do
     t.float "amount_left"
     t.boolean "paid", default: false
     t.text "category"
+    t.integer "counter"
   end
 
 end
