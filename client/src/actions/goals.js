@@ -127,12 +127,13 @@ export function updateGoal(goal) {
 
 //DELETE ITEMS
 
-  export function deleteGoal(id) {
+  export function deleteGoal(goal) {
+    let id = goal.id
     return function(dispatch) {
       return fetch(`/api/v1/goals/${id})`, {
         method: 'DELETE',
       }).then((response) => { console.log('Goal was deleted!')
-      }).then(response => dispatch({ type: 'DELETE_GOAL', id }))
+      }).then(response => dispatch({ type: 'DELETE_GOAL', response }))
     }
   }
 

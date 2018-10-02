@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { createGoal, goalPaid, updateGoal } from '../actions/goals'
+import { createGoal, goalPaid, updateGoal, deleteGoal } from '../actions/goals'
 
 class Goal extends Component {
 
@@ -18,27 +18,13 @@ class Goal extends Component {
   }
 
   onCounterClick = event => {
-    let goalId = event.target.value
-    let counterNum = this.state.counter
-    this.props.updateGoal({ id: goalId, counter: counterNum})
     this.setState({
       counter: this.state.counter += 1
     })
+    let goalId = event.target.value
+    let counterNum = this.state.counter
+    this.props.updateGoal({ id: goalId, counter: counterNum})
   }
-
-
-  renderGoal() {
-    return (
-      <div>
-        <h4>{this.props.goal.title}</h4>
-        <p>Total: {this.props.goal.total}</p>
-        <p>Category: {this.props.goal.category}</p>
-        <p>Counter: {this.state.counter}</p>
-        <button onClick={this.onClick} value={this.props.goal.counter}>++</button>
-        <a href="#" onClick={() => goalPaid(this.props.goal.id, false)}>Add to active goals?</a>
-      </div>
-      )
-    }
 
     render() {
       return (
@@ -46,11 +32,12 @@ class Goal extends Component {
           <h4>{this.props.goal.title}</h4>
           <p>Total: {this.props.goal.total}</p>
           <p>Category: {this.props.goal.category}</p>
-          <p>Counter: {this.props.goal.counter}</p>
+          <p>Counter: {this.state.counter}</p>
           <button onClick={this.onCounterClick} value={this.props.goal.id}>++</button>
+          <button onClick={()=>this.props.deleteGoal(this.props.goal)}>Delete</button>
         </div>
       )
     }
 }
 
-export default connect(null, { createGoal, goalPaid, updateGoal })(Goal);
+export default connect(null, { createGoal, goalPaid, updateGoal, deleteGoal })(Goal);

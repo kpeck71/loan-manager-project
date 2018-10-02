@@ -27,7 +27,6 @@ let goal;
 
     case 'ADD_GOAL':
       goal = {
-        id: cuid(),
         title: action.newGoal.title,
         total: action.newGoal.total,
         category: action.newGoal.category,
@@ -47,7 +46,6 @@ let goal;
 
     case 'DELETE_GOAL':
       return { ...state, goals: state.goals.filter(goal => goal.id !== action.id )};
-
 
     default:
       return state

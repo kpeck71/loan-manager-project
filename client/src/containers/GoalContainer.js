@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import CardCreator from '../components/CardCreator';
-import { fetchGoals, createGoal, deleteGoal } from '../actions/goals'
+import { bindActionCreators } from 'redux';
+import Goal from '../components/Goal';
+import GoalInput from '../components/GoalInput';
+import * as actions from '../actions/goals'
 
 class GoalContainer extends Component {
 
   state = {
     isHidden: true,
-    title: '',
-    total: '',
-    category: ''
+
   }
 
   componentDidMount() {
-    this.props.fetchGoals()
+    this.props.actions.fetchGoals();
   }
 
   toggleHidden() {
@@ -22,45 +22,27 @@ class GoalContainer extends Component {
     })
   }
 
-  renderGoals() {
-    const activeGoals = this.props.goals.filter((goal) => goal.paid === false)
-    return activeGoals.map((goal) => {
-      return <CardCreator goal={goal} cardDetails="goalCard" goalId={goal.id} handleComplete={this.props.handleComplete} deleteGoal={this.props.deleteGoal} />
-    });
-  }
-
   handleChange = event => {
     //arrow functions bind the this value to the function
     const target = event.target;
     const value = target.value;
     const name = target.name;
+    console.log(name)
     this.setState({
       [name]: value
     })
   }
 
-  handleGoalSubmit = event => {
-    event.preventDefault();
-    this.props.createGoal({ title: this.state.title, total: this.state.total, category: this.state.category })
-    this.setState({
-      title: '',
-      total: '',
-      category: '',
-      isHidden: true
-    })
-
-  }
-
   render() {
-
+    const allGoals = this.props.goals.goals.map(goal => <Goal goal={goal} />)
     return (
       <div>
         <h3>Current Goals:</h3>
         <div className="container-fluid">
         <button class="btn btn-outline-info" onClick={this.toggleHidden.bind(this)} type="submit">New Goal</button>
           <div className="row">
-            {this.renderGoals()}
-            {!this.state.isHidden && <CardCreator cardDetails="newGoal" handleChange={this.handleChange.bind(this)} handleGoalSubmit={this.handleGoalSubmit} deleteGoal={this.deleteGoal}/>}
+            {allGoals}
+            {!this.state.isHidden && <GoalInput createGoal={this.props.actions.createGoal}/>}
           </div>
 
         </div>
@@ -74,4 +56,8 @@ const mapStateToProps = state => {
   return { goals: state.goals }
 }
 
-export default connect(null, { fetchGoals, createGoal, deleteGoal })(GoalContainer)
+function mapDispatchToProps(dispatch) {
+  return {actions: bindActionCreators(actions, dispatch)}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(GoalContainer)
