@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import Goal from '../components/Goal';
-import GoalInput from '../components/GoalInput';
+import Goal from '../containers/Goal';
+import GoalInput from '../containers/GoalInput';
 import * as actions from '../actions/goals'
 
 class GoalContainer extends Component {
