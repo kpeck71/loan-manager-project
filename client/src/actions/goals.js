@@ -1,3 +1,5 @@
+// rename to something other than goals
+
 export const addGoal = (goal) => {
   return {
     type: 'ADD_GOAL',
@@ -11,6 +13,7 @@ export const addExpense = (expense) => {
     expense
   };
 };
+
 
 export function updateBudget(newBudget) {
   return function(dispatch) {
@@ -86,7 +89,7 @@ export function fetchExpenses() {
   return(dispatch) => {
     return fetch('/api/v1/expenses.json')
       .then(response => response.json())
-      .then(expenses => dispatch({ type: 'FETCH_EXPENSES', payload: expenses }));
+      .then(expenses => dispatch({ type: 'FETCH_EXPENSES', expenses }));
     };
 }
 
@@ -98,6 +101,25 @@ export function goalPaid(id, status) {
         method: 'PUT',
         headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
         body: JSON.stringify({'paid': status})
+      }).then(response => response.json())
+      .then(goal => dispatch({type: 'UPDATE_GOAL', goal}))
+    }
+  }
+
+//can combine goalPaid and updateGoal into one
+
+export function updateGoal(goal) {
+  return function(dispatch) {
+    let counterVal = goal["counter"]
+    let id = goal["id"]
+    return fetch(`/api/v1/goals/${id}`, {
+        method: 'PUT',
+        headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
+        body: JSON.stringify({
+          goal: {
+            counter: counterVal,
+          }
+        })
       }).then(response => response.json())
       .then(goal => dispatch({type: 'UPDATE_GOAL', goal}))
     }
