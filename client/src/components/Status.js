@@ -3,9 +3,17 @@ import { connect } from 'react-redux';
 import { fetchExpenses } from '../actions/goals'
 
 class Status extends Component {
+  state = {
+    expenses: [],
+    expenseTotal: 0
+  }
 
   componentDidMount() {
-    this.props.fetchExpenses()
+    this.props.fetchExpenses().then((data) => {
+    this.setState({
+      expenses: data
+      })
+    })
   }
 
   renderFun() {
@@ -18,7 +26,7 @@ class Status extends Component {
 
   calculatePercentage() {
     let obtained = this.renderFun()
-    return (obtained*100/this.props.expenses.expenseTotal).toFixed(2)
+    return (obtained*100/this.state.expenses.expenseTotal).toFixed(2)
   }
 
   render() {
@@ -39,6 +47,6 @@ class Status extends Component {
      )
    }
 }
-const mapStateToProps = state => {return {expenses: state.budget}}
+// const mapStateToProps = state => {return {expenses: state.budget.expenses}}
 
-export default connect(mapStateToProps, { fetchExpenses })(Status)
+export default connect(null, { fetchExpenses })(Status)

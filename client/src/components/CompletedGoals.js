@@ -8,7 +8,7 @@ const CompletedGoals = props => {
 
   const renderGoals =
     completedGoals.map((goal) => {
-      return <Goal goal={goal} goalDetails="completedGoal" />
+      return <Goal goal={goal} />
     });
 
   return (

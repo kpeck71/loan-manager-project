@@ -1,11 +1,11 @@
 import React from 'react'
-import CardCreator from './CardCreator'
+import Goal from '../containers/Goal'
 
 const IdeaBrowser = props => {
 
  const renderIdeas = (
    props.goalIdeas.map((idea) =>
-     <CardCreator goal={idea} className='warning' cardDetails="goalIdea" />
+     <Goal goal={idea} className='warning' cardDetails="goalIdea" />
    )
  )
 

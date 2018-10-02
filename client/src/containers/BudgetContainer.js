@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import CardCreator from '../components/CardCreator';
+import Expense from '../components/Expense';
+import ExpenseInput from '../containers/ExpenseInput';
 import BudgetInput from './BudgetInput'
 import { fetchBudget, fetchExpenses, updateBudget, deleteExpense, createExpense } from '../actions/goals'
 
@@ -27,7 +28,7 @@ class BudgetContainer extends Component {
 
   renderExpenses() {
     return this.props.budget.expenses.map((expense) => {
-      return <CardCreator expense={expense} cardDetails="expenseCard" />
+      return <Expense expense={expense} cardDetails="expenseCard" />
     });
   }
   calculateBudget() {
@@ -69,7 +70,7 @@ render() {
             <button class="btn btn-outline-info" onClick={this.toggleHidden.bind(this)} type="submit">New Expense</button>
             <div className="row">
               {this.renderExpenses()}
-              {!this.state.isHidden && <CardCreator cardDetails="newExpense" handleChange={this.handleChange.bind(this)} handleExpenseSubmit={this.handleExpenseSubmit} deleteExpense={this.deleteExpense}/>}
+              {!this.state.isHidden && <ExpenseInput cardDetails="newExpense" handleChange={this.handleChange.bind(this)} handleExpenseSubmit={this.handleExpenseSubmit} deleteExpense={this.deleteExpense}/>}
             </div>
           </div>
         </div>
