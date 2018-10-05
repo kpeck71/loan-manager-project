@@ -39,7 +39,7 @@ class GoalContainer extends Component {
       <div>
         <h3>Current Goals:</h3>
         <div className="container-fluid">
-        <button class="btn btn-outline-info" onClick={this.toggleHidden.bind(this)} type="submit">New Goal</button>
+        <button className="btn btn-outline-info" onClick={this.toggleHidden.bind(this)} type="submit">New Goal</button>
           <div className="row">
             {allGoals}
             {!this.state.isHidden && <GoalInput createGoal={this.props.actions.createGoal}/>}

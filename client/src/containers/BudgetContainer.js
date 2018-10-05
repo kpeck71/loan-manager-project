@@ -27,6 +27,7 @@ class BudgetContainer extends Component {
   }
 
   renderExpenses() {
+    this.calculateExpenseTotals()
     return this.props.budget.expenses.map((expense) => {
       return <Expense expense={expense} cardDetails="expenseCard" />
     });
@@ -57,6 +58,10 @@ class BudgetContainer extends Component {
     })
   }
 
+  calculateExpenseTotals() {
+    console.log('expenses are ', this.props.budget.expenses)
+  }
+
 render() {
     return (
       <React.Fragment>
@@ -67,7 +72,7 @@ render() {
         <div className="expenseGroup">
           <h3>Current Expenses: ${this.props.budget.expenseTotal}</h3>
           <div className="container-fluid">
-            <button class="btn btn-outline-info" onClick={this.toggleHidden.bind(this)} type="submit">New Expense</button>
+            <button className="btn btn-outline-info" onClick={this.toggleHidden.bind(this)} type="submit">New Expense</button>
             <div className="row">
               {this.renderExpenses()}
               {!this.state.isHidden && <ExpenseInput cardDetails="newExpense" handleChange={this.handleChange.bind(this)} handleExpenseSubmit={this.handleExpenseSubmit} deleteExpense={this.deleteExpense}/>}
