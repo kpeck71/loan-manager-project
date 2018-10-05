@@ -96,8 +96,9 @@ export function fetchExpenses() {
 // UPDATE ITEMS
 
 export function goalPaid(goal, status) {
+  let goalId = parseInt(goal)
   return(dispatch) => {
-    return fetch(`/api/v1/goals/${goal.id}`, {
+    return fetch(`/api/v1/goals/${goalId}`, {
         method: 'PUT',
         headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
         body: JSON.stringify({'paid': status})

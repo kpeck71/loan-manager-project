@@ -27,6 +27,13 @@ class Goal extends Component {
     this.props.updateGoal({ id: goalId, counter: counterNum})
   }
 
+  onCompleteClick = event => {
+    this.setState({
+      paid: !this.state.paid
+    })
+    this.props.goalPaid(event.target.value, !this.state.paid)
+  }
+
     render() {
       const renderButton = <button onClick={this.onCounterClick} value={this.props.goal.id}>++</button>
 
@@ -38,7 +45,7 @@ class Goal extends Component {
           <p>Counter: {this.state.counter}</p>
           {(this.props.goal.paid === true) && <button onClick={this.onCounterClick} value={this.props.goal.id}>++</button> }
           <button onClick={()=>this.props.deleteGoal(this.props.goal)}>Delete</button>
-          <button onClick={()=>this.props.goalPaid(this.props.goal, !this.props.goal.paid)}>Completed Toggle</button>
+          <button onClick={this.onCompleteClick} value={this.props.goal.id}>Completed Toggle</button>
         </div>
       )
     }
