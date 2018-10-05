@@ -19,9 +19,13 @@ class Goal extends Component {
   }
 
   onCounterClick = event => {
+
     this.setState({
       counter: this.state.counter += 1
-    })
+    }, () => {
+     console.log('updated state value', this.state.counter)}
+   );
+
     let goalId = event.target.value
     let counterNum = this.state.counter
     this.props.updateGoal({ id: goalId, counter: counterNum})
@@ -38,7 +42,7 @@ class Goal extends Component {
       const renderButton = <button onClick={this.onCounterClick} value={this.props.goal.id}>++</button>
 
       return (
-        <div className="col-md-3 border rounded p-2 m-2 mx-5 border-info">
+        <div className="col-md-3 border rounded p-2 m-2 mx-5 border-info" id={this.props.goal.id}>
           <h4>{this.props.goal.title}</h4>
           <p>Total: {this.props.goal.total}</p>
           <p>Category: {this.props.goal.category}</p>
