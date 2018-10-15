@@ -19,7 +19,6 @@ class Goal extends Component {
   }
 
   onCounterClick = event => {
-
     this.setState({
       counter: this.state.counter += 1
     }, () => {

@@ -11,6 +11,7 @@ class CompletedGoals extends React.Component {
   }
 
   onClick = () => {
+<<<<<<< Updated upstream
     console.log(this.state.goals)
     const sortedGoals = this.state.goals.sort(function(a,b) {
       return b.counter - a.counter
@@ -19,6 +20,15 @@ class CompletedGoals extends React.Component {
     this.setState({
       goals: sortedGoals
     })
+=======
+    this.setState(prevState => {
+      const sortedGoals = prevState.goals.slice().sort(function(a,b) {
+        return b.counter - a.counter
+      })
+      return {
+        goals: sortedGoals
+    }})
+>>>>>>> Stashed changes
 
   }
 

@@ -126,6 +126,8 @@ export function updateGoal(goal) {
     }
   }
 
+// .catch for failures for fetch requests
+
 //DELETE ITEMS
 
   export function deleteGoal(goal) {
