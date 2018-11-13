@@ -23,7 +23,7 @@ class App extends Component {
                   <GoalContainer goals={this.props.goals.goals}/>
                 </React.Fragment>
               }/>
-            <Route exact path='/status' component={Status} />
+            <Route exact path='/status' render ={routerProps => <Status {...routerProps} expenses={this.props.budget.expenses} />} />
             <Route exact path='/completed' render={routerProps => <CompletedGoals {...routerProps} goals={this.props.goals.goals} />}/>
             <Route exact path='/ideas' component={GoalIdeas} />
           </React.Fragment>

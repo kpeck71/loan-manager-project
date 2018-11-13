@@ -13,6 +13,8 @@ class BudgetContainer extends Component {
     name: '',
     amount: '',
     category: '',
+    budget: [],
+    expenses: []
   }
 
   toggleHidden() {
@@ -22,8 +24,10 @@ class BudgetContainer extends Component {
   }
 
   componentDidMount(){
-    this.props.fetchBudget(),
-    this.props.fetchExpenses()
+    this.setState({
+      budget: this.props.fetchBudget(),
+      expenses: this.props.fetchExpenses()
+    })
   }
 
   renderExpenses() {

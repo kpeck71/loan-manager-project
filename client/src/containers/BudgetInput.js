@@ -31,7 +31,7 @@ class BudgetInput extends Component {
     return (
       <div className="budget-view col-md-5 border border-primary rounded m-2 p-1 mx-auto">
         <form onSubmit={this.handleSubmit}>
-          <input type="number" name="income" placeholder="Monthly Income"  value={this.state.income} onChange={this.handleChange}/>
+          <input type="number" name="income" placeholder="Monthly Income" value={this.state.income} onChange={this.handleChange}/>
           <input type="submit" />
         </form>
       </div>

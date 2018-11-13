@@ -4,7 +4,7 @@ class ExpenseInput extends Component {
   render() {
     return(
       <div className="col-md-3 border rounded p-2 m-2 mx-5 border-warning">
-        <form onSubmit={this.props.handleExpenseSubmit}>
+        <form onSubmit={this.props.handleExpenseSubmit} data-testid="expense-form">
           <input type="text" name="name" value={this.props.name} placeholder="Name" onChange={this.props.handleChange} />
           <input type="number" name="amount" value={this.props.amount} placeholder="Amount" onChange={this.props.handleChange} />
           <p></p>

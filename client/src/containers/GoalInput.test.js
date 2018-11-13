@@ -4,9 +4,9 @@ import GoalInput from './GoalInput'
 
 describe('GoalInput', () => {
   it ('renders the Goal form', () => {
-    const { getByPlaceholderText } = render(<GoalInput />)
-    const placeholder = getByPlaceholderText('Title')
-    expect(placeholder.innerHTML).toBe('Title')
+    const { queryByText } = render(<GoalInput />)
+    const title = queryByText('New Goal')
+    expect(title.innerHTML).toBe('New Goal')
   })
 
 })
