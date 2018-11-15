@@ -39,7 +39,7 @@ class Goal extends Component {
   }
 
     render() {
-      const renderButton = <button onClick={this.onCounterClick} value={this.props.goal.id}>++</button>
+
 
       return (
         <div className="col-md-3 border rounded p-2 m-2 mx-5 border-info" id={this.props.goal.id}>

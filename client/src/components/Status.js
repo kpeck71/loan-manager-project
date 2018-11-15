@@ -6,8 +6,11 @@ import SimplePieChart from '../containers/SimplePieChart'
 class Status extends Component {
   state = {
     expenses: [],
-    expenseTotal: 0,
-    chartData: {}
+    chartData: {},
+    funAmount: 0,
+    essentialsAmount: 0,
+    creditAmount: 0,
+    miscAmount: 0
   }
 
   componentDidMount() {
@@ -16,26 +19,48 @@ class Status extends Component {
       expenses: data
       })
     })
+    this.getChartData();
+    this.setCategoryAmounts();
   }
 //https://daveceddia.com/where-fetch-data-componentwillmount-vs-componentdidmount/
-  componentWillMount(){
-    this.getChartData();
-  }
+  // componentDidMount(){
+  //     this.getChartData();
+  //     this.setCategoryAmounts();
+  // }
+
+//https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce
 
   getChartData() {
+    let expenses = this.props.budget.expenses
+    let addUpExpenses;
+    // if (this.props.budget.expenses.length > 0) {
+    //   addUpExpenses = expenses.reduce(function (acc, obj) {
+    //     let key = obj["category"];
+    //     if (!acc[key]) {
+    //       acc[key] = [];
+    //     }
+    //      acc[key].push(obj.amount)
+    //     return acc;
+    //   }, {});
+    // } else {
+    //   addUpExpenses = {
+    //     credit: [{amount: 125, category: "credit", id: 47, name: "Credit card"}],
+    //     essentials: [{amount: 1000, category: "essentials", id: 46, name: "Rent"}, {amount: 250, category: "essentials", id: 48, name: "groceries"}],
+    //     fun: [{amount: 100, category: "fun", id: 49, name: "dinner out"}]
+    //   }
+    // }
+
     this.setState({
      chartData:{
-       labels: ['Boston', 'Worcester', 'Springfield', 'Lowell', 'Cambridge', 'New Bedford'],
+       labels: ['fun', 'credit','essentials', 'miscellaneous'],
        datasets:[
          {
-           label:'Population',
+           label:'Categories',
            data:[
-             617594,
-             181045,
-             153060,
-             106519,
-             105162,
-             95072
+             this.props.funAmount,
+             this.props.creditAmount,
+             this.props.essentialsAmount,
+             this.props.miscAmount
            ],
            backgroundColor:[
              'rgba(255, 99, 132, 0.6)',
@@ -53,17 +78,54 @@ class Status extends Component {
  }
 
 
-  renderFun() {
-    let funTotal = 0
-    return funTotal = 500
-  }
-  renderEssentials() {
-    return 1100
-  }
+  setCategoryAmounts() {
+    if (this.props.budget.expenses.length > 0) {
+      let expenses = this.props.expenses
 
+      let isFun = (expense) => {
+        return expense.category === 'fun';
+      }
+      let isCredit = (expense) => {
+        return expense.category === 'credit';
+      }
+      let isEssentials = (expense) => {
+        return expense.category === 'essentials';
+      }
+      let isMisc = (expense) => {
+        return expense.category === 'miscellaneous';
+      }
+
+      // let isCategory = (expense, type) => {
+      //   return expense.category === `${type}`;
+      // }
+
+      let newAmount = (expense) => {
+        return expense.amount;
+      }
+
+      let newSum = (sum, expense) => {
+        return sum + expense;
+      }
+
+      this.setState({
+        totalFun: expenses.filter(isFun.map(newAmount).reduce(newSum)),
+        totalEssentials: expenses.filter(isEssentials.map(newAmount).reduce(newSum)),
+        totalCredit: expenses.filter(isCredit.map(newAmount).reduce(newSum)),
+        totalMisc: expenses.filter(isMisc.map(newAmount).reduce(newSum))
+      })
+    } else {
+      this.setState({
+        totalFun: 100,
+        totalEssentials: 100,
+        totalCredit: 100,
+        totalMisc: 100
+      })
+    }
+  }
+  
   calculatePercentage() {
-    let obtained = this.renderFun()
-    return (obtained*100/this.state.expenses.expenseTotal).toFixed(2)
+    let obtained = this.props.budget.essentialTotals
+    return (obtained*100/this.props.expenseTotal).toFixed(2)
   }
 
   render() {
@@ -71,17 +133,17 @@ class Status extends Component {
     return (
       <div className="status-container">
         <h2>Here is where you can improve</h2>
-          <SimplePieChart chartData={this.state.chartData}/>,
+          <p>Example: xyz </p>
+          <SimplePieChart chartData={this.props.chartData}/>,
         <div className="row">
           <div className="col-lg-8">
-          <p>You're spending {this.renderFun()} in the "fun" category. That is {this.calculatePercentage()}% of all your expenses.</p>
-          <p>You're spending {this.renderEssentials()} in the 'essentials' category</p>
+          <p>You're spending ${this.props.budget.essentialTotals} in the "essentials" category. That is {this.calculatePercentage()}% of your ${this.props.expenseTotal} expenses.</p>
           </div>
         </div>
       </div>
      )
    }
 }
-// const mapStateToProps = state => {return {expenses: state.budget.expenses}}
+const mapStateToProps = state => { return { expenses: state.expenses, expenseTotal: state.budget.expenseTotal}}
 
-export default connect(null, { fetchExpenses })(Status)
+export default connect(mapStateToProps,{ fetchExpenses })(Status)

@@ -26,7 +26,7 @@
 
 // pure functions, take in previous state, an action, and returns the next state
 
-export default function budgetReducer(state = { income: '', expenses: [], expenseTotal: '' }, action) {
+export default function budgetReducer(state = { income: '', expenses: '', expenseTotal: '' }, action) {
 
 let budget;
 let expenseTotalSum;
@@ -57,9 +57,13 @@ let expenseTotalSum;
 
   case 'FETCH_EXPENSES':
     let allExpenses = action.expenses
-    expenseTotalSum = 0
+    expenseTotalSum = 0;
     allExpenses.map((expense) => expenseTotalSum += expense.amount)
-    return {...state, expenses: allExpenses, expenseTotal: expenseTotalSum}
+    let funExpenses = allExpenses.filter((expense) => expense.category === "fun")
+    let essentialExpenses = allExpenses.filter((expense) => expense.category === "essentials")
+    let initialValue = 0
+    let essentialTotals = essentialExpenses.reduce((acc, cv) => acc + cv.amount, initialValue)
+    return {...state, expenses: allExpenses, expenseTotal: expenseTotalSum, essentialTotals: essentialTotals }
 
     default:
       return state

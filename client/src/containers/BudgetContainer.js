@@ -1,20 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import Expense from '../components/Expense';
 import ExpenseInput from '../containers/ExpenseInput';
 import BudgetInput from './BudgetInput'
-import { fetchBudget, fetchExpenses, updateBudget, deleteExpense, createExpense } from '../actions/goals'
+import * as actions from '../actions/goals'
 
 
 class BudgetContainer extends Component {
 
   state = {
     isHidden: true,
-    name: '',
-    amount: '',
-    category: '',
-    budget: [],
-    expenses: []
   }
 
   toggleHidden() {
@@ -23,18 +19,18 @@ class BudgetContainer extends Component {
     })
   }
 
-  componentDidMount(){
-    this.setState({
-      budget: this.props.fetchBudget(),
-      expenses: this.props.fetchExpenses()
-    })
+  componentDidMount() {
+    this.props.actions.fetchExpenses();
+    this.props.actions.fetchBudget();
   }
 
   renderExpenses() {
-    this.calculateExpenseTotals()
+    if (this.props.budget.expenses.length > 0) {
     return this.props.budget.expenses.map((expense) => {
       return <Expense expense={expense} cardDetails="expenseCard" />
     });
+  } else return null
+
   }
   calculateBudget() {
     let budget = this.props.budget.income
@@ -53,17 +49,13 @@ class BudgetContainer extends Component {
 
   handleExpenseSubmit = event => {
     event.preventDefault();
-    this.props.createExpense({name: this.state.name, amount: this.state.amount, category: this.state.category})
+    this.props.actions.createExpense({name: this.state.name, amount: this.state.amount, category: this.state.category})
     this.setState({
       name: '',
       amount: '',
       category: '',
       isHidden: true
     })
-  }
-
-  calculateExpenseTotals() {
-    console.log('expenses are ', this.props.budget.expenses)
   }
 
 render() {
@@ -88,6 +80,10 @@ render() {
   }
 }
 
-const mapStateToProps = state => { return { budget: state.budget }}
+// const mapStateToProps = state => { return { budget: state.budget }}
 
-export default connect(mapStateToProps, { fetchBudget, fetchExpenses, updateBudget, deleteExpense, createExpense })(BudgetContainer)
+function mapDispatchToProps(dispatch) {
+  return {actions: bindActionCreators(actions, dispatch)}
+}
+
+export default connect(null, mapDispatchToProps)(BudgetContainer)
